@@ -3,7 +3,7 @@ import { Application, Graphics, utils, TextStyle, Text } from 'pixi.js'
 import toHex from 'colornames'
 import { extend } from '../lib/utils/extend'
 import "./main.scss"
-import PixiScroller from '../lib'
+import PixiBetterScroller from '../lib'
 
 window.PIXI = PIXI
 
@@ -38,39 +38,6 @@ const game = new Application({
 })
 game.renderer.resize(iw, ih)
 
-const verRect = createRect({
-    width: 180,
-    height: 1000,
-    backgroundColor: '#beebe9',
-})
-
-for (let i = 0; i < 14; i++) {
-    const item = createRect({
-        x: 20,
-        y: 15 + 70 * i,
-        width: 140,
-        height: 60,
-        backgroundColor: '#fffdf9',
-    })
-    const text = createText({
-        content: `item - ${i}`,
-        style: {
-            fill: '#8ac6d1',
-            fontSize: 20,
-        },
-    })
-    text.x = (item.width - text.width) / 2 
-    text.y = (item.height - text.height) / 2 
-    item.addChild(text)
-
-    item.interactive = true
-    item.on('tap', () => {
-        console.log(`Tap item-${i}`)
-    })
-    
-    verRect.addChild(item)
-}
-
 const ver = createRect({
     width: 180,
     height: 280,
@@ -80,9 +47,13 @@ const ver = createRect({
     borderColor: '#f35588',
 })
 
-game.stage.addChild(ver)
+const verRect = createRect({
+    width: 180,
+    height: 1000,
+    backgroundColor: '#beebe9',
+})
 
-const scroller = new PixiScroller({
+const scroller = new PixiBetterScroller({
     direction: 'vertical',
     width: 180,
     height: 280,
@@ -125,6 +96,35 @@ const scroller = new PixiScroller({
     },
 }, ver)
 
+for (let i = 0; i < 14; i++) {
+    const item = createRect({
+        x: 20,
+        y: 15 + 70 * i,
+        width: 140,
+        height: 60,
+        backgroundColor: '#fffdf9',
+    })
+    const text = createText({
+        content: `item - ${i}`,
+        style: {
+            fill: '#8ac6d1',
+            fontSize: 20,
+        },
+    })
+    text.x = (item.width - text.width) / 2 
+    text.y = (item.height - text.height) / 2 
+    item.addChild(text)
+
+    item.interactive = true
+    item.on('tap', () => {
+        console.log(`Tap item-${i}`)
+    })
+    
+    verRect.addChild(item)
+}
+
+game.stage.addChild(ver)
+
 const refresh = createText({
     content: 'Refresh',
     x: 66,
@@ -166,6 +166,20 @@ const hor = createRect({
 })
 game.stage.addChild(hor)
 
+const scroller1 = new PixiBetterScroller({
+    direction: 'horizontal',
+    width: 260,
+    height: 160,
+    onScroll(pos) {
+        // console.log('scroll', pos)
+    },
+    onBounce(direction, next) {
+        // console.log('onBounce', direction)
+        next()
+    },
+}, hor)
+scroller1.addChild(horRect)
+
 for (let i = 0; i < 14; i++) {
     const item = createRect({
         y: 20,
@@ -187,25 +201,13 @@ for (let i = 0; i < 14; i++) {
 
     item.interactive = true
     item.on('tap', () => {
-        console.log(`Tap item-${i}`)
+        if (!scroller1.scrolling) {
+            console.log(`Tap item-${i}`)
+        }
     })
 
     horRect.addChild(item)
 }
-
-const scroller1 = new PixiScroller({
-    direction: 'horizontal',
-    width: 260,
-    height: 160,
-    onScroll(pos) {
-        console.log('scroll', pos)
-    },
-    onBounce(direction, next) {
-        console.log('onBounce', direction)
-        next()
-    },
-}, hor)
-scroller1.addChild(horRect)
 
 export function createRect(ops) {
     const { 

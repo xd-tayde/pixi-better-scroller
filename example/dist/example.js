@@ -1,7 +1,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (global = global || self, factory(global.PixiScroller = {}));
+    (global = global || self, factory(global.PixiBetterScroller = {}));
 }(this, function (exports) { 'use strict';
 
     document.write('<script src="http://' + (location.host || "localhost").split(":")[0] + ':35729/livereload.js?snipver=1"></' + "script>")
@@ -630,6 +630,7 @@
     {
         window.Int32Array = Array;
     }
+    //# sourceMappingURL=polyfill.es.js.map
 
     const appleIphone = /iPhone/i;
     const appleIpod = /iPod/i;
@@ -722,6 +723,9 @@
             result.apple.tablet || result.android.tablet || result.windows.tablet;
         return result;
     }
+    //# sourceMappingURL=isMobile.js.map
+
+    //# sourceMappingURL=index.js.map
 
     /*!
      * @pixi/settings - v5.2.1
@@ -1038,6 +1042,7 @@
          */
         ROUND_PIXELS: false,
     };
+    //# sourceMappingURL=settings.es.js.map
 
     var eventemitter3 = createCommonjsModule(function (module) {
 
@@ -3801,6 +3806,7 @@
         MASK_TYPES[MASK_TYPES["STENCIL"] = 2] = "STENCIL";
         MASK_TYPES[MASK_TYPES["SPRITE"] = 3] = "SPRITE";
     })(MASK_TYPES || (MASK_TYPES = {}));
+    //# sourceMappingURL=constants.es.js.map
 
     /*!
      * @pixi/utils - v5.2.1
@@ -4662,6 +4668,7 @@
         }
         return defaultValue !== undefined ? defaultValue : 1;
     }
+    //# sourceMappingURL=utils.es.js.map
 
     var utils = /*#__PURE__*/Object.freeze({
         BaseTextureCache: BaseTextureCache,
@@ -6607,6 +6614,7 @@
         };
         return RoundedRectangle;
     }());
+    //# sourceMappingURL=math.es.js.map
 
     /*!
      * @pixi/display - v5.2.1
@@ -8508,6 +8516,7 @@
 
     // performance increase to avoid using call.. (10x faster)
     Container.prototype.containerUpdateTransform = Container.prototype.updateTransform;
+    //# sourceMappingURL=display.es.js.map
 
     /*!
      * @pixi/accessibility - v5.2.1
@@ -9194,6 +9203,7 @@
         this.children = null;
         this.renderer = null;
     };
+    //# sourceMappingURL=accessibility.es.js.map
 
     var accessibility_es = /*#__PURE__*/Object.freeze({
         AccessibilityManager: AccessibilityManager,
@@ -10041,6 +10051,7 @@
         };
         return TickerPlugin;
     }());
+    //# sourceMappingURL=ticker.es.js.map
 
     /*!
      * @pixi/interaction - v5.2.1
@@ -12630,6 +12641,7 @@
 
         return InteractionManager;
     }(eventemitter3));
+    //# sourceMappingURL=interaction.es.js.map
 
     var interaction_es = /*#__PURE__*/Object.freeze({
         InteractionData: InteractionData,
@@ -12834,6 +12846,7 @@
          */
         run: { value: Runner.prototype.emit },
     });
+    //# sourceMappingURL=runner.es.js.map
 
     /*!
      * @pixi/core - v5.2.1
@@ -25892,6 +25905,7 @@
     // Setup the default BatchRenderer plugin, this is what
     // we'll actually export at the root level
     var BatchRenderer = BatchPluginFactory.create();
+    //# sourceMappingURL=core.es.js.map
 
     /*!
      * @pixi/app - v5.2.1
@@ -26117,6 +26131,7 @@
     };
 
     Application.registerPlugin(ResizePlugin);
+    //# sourceMappingURL=app.es.js.map
 
     /*!
      * @pixi/extract - v5.2.1
@@ -26401,6 +26416,7 @@
             }
         }
     };
+    //# sourceMappingURL=extract.es.js.map
 
     var parseUri = function parseURI (str, opts) {
       opts = opts || {};
@@ -28929,6 +28945,7 @@
 
       return Loader;
     };
+    //# sourceMappingURL=resource-loader.esm.js.map
 
     /*!
      * @pixi/loaders - v5.2.1
@@ -29230,6 +29247,7 @@
      * @memberof PIXI
      */
     var LoaderResource = Resource$1;
+    //# sourceMappingURL=loaders.es.js.map
 
     /*!
      * @pixi/particles - v5.2.1
@@ -30207,6 +30225,7 @@
 
         return ParticleRenderer;
     }(ObjectRenderer));
+    //# sourceMappingURL=particles.es.js.map
 
     /*!
      * @pixi/graphics - v5.2.1
@@ -34012,6 +34031,7 @@
      * @member {PIXI.Point}
      */
     Graphics._TEMP_POINT = new Point();
+    //# sourceMappingURL=graphics.es.js.map
 
     /*!
      * @pixi/sprite - v5.2.1
@@ -34689,6 +34709,7 @@
 
         return Sprite;
     }(Container));
+    //# sourceMappingURL=sprite.es.js.map
 
     /*!
      * @pixi/text - v5.2.1
@@ -36989,6 +37010,7 @@
 
         return Text;
     }(Sprite));
+    //# sourceMappingURL=text.es.js.map
 
     /*!
      * @pixi/prepare - v5.2.1
@@ -37715,6 +37737,7 @@
     {
         return Date.now() - this.frameStart < this.maxMilliseconds;
     };
+    //# sourceMappingURL=prepare.es.js.map
 
     /*!
      * @pixi/spritesheet - v5.2.1
@@ -38123,6 +38146,7 @@
 
         return url.resolve(resource.url.replace(baseUrl, ''), resource.data.meta.image);
     };
+    //# sourceMappingURL=spritesheet.es.js.map
 
     /*!
      * @pixi/sprite-tiling - v5.2.1
@@ -38628,6 +38652,7 @@
 
         return TilingSpriteRenderer;
     }(ObjectRenderer));
+    //# sourceMappingURL=sprite-tiling.es.js.map
 
     /*!
      * @pixi/text-bitmap - v5.2.1
@@ -39454,6 +39479,7 @@
             }
         }
     };
+    //# sourceMappingURL=text-bitmap.es.js.map
 
     /*!
      * @pixi/filter-alpha - v5.2.1
@@ -39518,6 +39544,7 @@
 
         return AlphaFilter;
     }(Filter));
+    //# sourceMappingURL=filter-alpha.es.js.map
 
     /*!
      * @pixi/filter-blur - v5.2.1
@@ -39943,6 +39970,7 @@
 
         return BlurFilter;
     }(Filter));
+    //# sourceMappingURL=filter-blur.es.js.map
 
     /*!
      * @pixi/filter-color-matrix - v5.2.1
@@ -40541,6 +40569,7 @@
 
     // Americanized alias
     ColorMatrixFilter.prototype.grayscale = ColorMatrixFilter.prototype.greyscale;
+    //# sourceMappingURL=filter-color-matrix.es.js.map
 
     /*!
      * @pixi/filter-displacement - v5.2.1
@@ -40658,6 +40687,7 @@
 
         return DisplacementFilter;
     }(Filter));
+    //# sourceMappingURL=filter-displacement.es.js.map
 
     /*!
      * @pixi/filter-fxaa - v5.2.1
@@ -40695,6 +40725,7 @@
 
         return FXAAFilter;
     }(Filter));
+    //# sourceMappingURL=filter-fxaa.es.js.map
 
     /*!
      * @pixi/filter-noise - v5.2.1
@@ -40774,6 +40805,7 @@
 
         return NoiseFilter;
     }(Filter));
+    //# sourceMappingURL=filter-noise.es.js.map
 
     /*!
      * @pixi/mixin-cache-as-bitmap - v5.2.1
@@ -41199,6 +41231,7 @@
         this.cacheAsBitmap = false;
         this.destroy(options);
     };
+    //# sourceMappingURL=mixin-cache-as-bitmap.es.js.map
 
     /*!
      * @pixi/mixin-get-child-by-name - v5.2.1
@@ -41236,6 +41269,7 @@
 
         return null;
     };
+    //# sourceMappingURL=mixin-get-child-by-name.es.js.map
 
     /*!
      * @pixi/mixin-get-global-position - v5.2.1
@@ -41273,6 +41307,7 @@
 
         return point;
     };
+    //# sourceMappingURL=mixin-get-global-position.es.js.map
 
     /*!
      * @pixi/mesh - v5.2.1
@@ -42053,6 +42088,7 @@
 
         return MeshGeometry;
     }(Geometry));
+    //# sourceMappingURL=mesh.es.js.map
 
     /*!
      * @pixi/mesh-extras - v5.2.1
@@ -42860,6 +42896,7 @@
 
         return NineSlicePlane;
     }(SimplePlane));
+    //# sourceMappingURL=mesh-extras.es.js.map
 
     /*!
      * @pixi/sprite-animated - v5.2.1
@@ -43304,6 +43341,7 @@
 
         return AnimatedSprite;
     }(Sprite));
+    //# sourceMappingURL=sprite-animated.es.js.map
 
     /*!
      * pixi.js - v5.2.1
@@ -44748,6 +44786,7 @@
         FXAAFilter: FXAAFilter,
         NoiseFilter: NoiseFilter,
     };
+    //# sourceMappingURL=pixi.es.js.map
 
     var PIXI = /*#__PURE__*/Object.freeze({
         accessibility: accessibility_es,
@@ -47571,6 +47610,7 @@
         }
         return target;
     }
+    //# sourceMappingURL=extend.js.map
 
     var typeString = 'Boolean Number String Function Array Date RegExp Object Error Symbol';
     var class2type = {};
@@ -47637,6 +47677,7 @@
             return type(tar) === 'NaN';
         },
     };
+    //# sourceMappingURL=is.js.map
 
     function getPoint(ev, index) {
         if (ev.data.pointerType === 'touch') {
@@ -47669,6 +47710,7 @@
             })();
         }
     };
+    //# sourceMappingURL=index.js.map
 
     // 挟持的原生事件
     var ORIGIN_EVENT_MAP = [{
@@ -47690,8 +47732,8 @@
             name: 'pointerout',
             fn: '_end',
         }];
-    var PixiScroller = /** @class */ (function () {
-        function PixiScroller(options, parent) {
+    var PixiBetterScroller = /** @class */ (function () {
+        function PixiBetterScroller(options, parent) {
             var _this = this;
             if (options === void 0) { options = {}; }
             this.direction = 'vertical';
@@ -47704,6 +47746,7 @@
             this.maxScrollDis = 0;
             this.touching = false;
             this.bouncing = 0;
+            this.scrolling = false;
             this.config = {
                 // 触发惯性滚动的 触摸时间上限
                 timeForEndScroll: 300,
@@ -47749,7 +47792,7 @@
             this.config = extend(this.config, this.options.config);
             this.init();
         }
-        PixiScroller.prototype.init = function () {
+        PixiBetterScroller.prototype.init = function () {
             this.container = new Container();
             this.container.addChild(this.content = new Container());
             this.container.x = this.x;
@@ -47764,7 +47807,7 @@
             this._createMask();
             this._bindOriginEvent();
         };
-        PixiScroller.prototype._createMask = function () {
+        PixiBetterScroller.prototype._createMask = function () {
             var mask = new Graphics();
             mask.beginFill(0xFFFFFF, 1);
             mask.drawRect(0, 0, this.width, this.height);
@@ -47772,7 +47815,7 @@
             this.container.addChild(this.mask = mask);
             this.container.mask = mask;
         };
-        PixiScroller.prototype._bindOriginEvent = function () {
+        PixiBetterScroller.prototype._bindOriginEvent = function () {
             var _this = this;
             this.container.interactive = true;
             ORIGIN_EVENT_MAP.map(function (_a) {
@@ -47780,12 +47823,12 @@
                 _this.container.on(name, _this[fn], _this);
             });
         };
-        PixiScroller.prototype._start = function (ev) {
+        PixiBetterScroller.prototype._start = function (ev) {
             this.startTime = Date.now();
             this.touching = true;
             this.touchStartPoint = this.startPoint = getPoint(ev, 0);
         };
-        PixiScroller.prototype._move = function (ev) {
+        PixiBetterScroller.prototype._move = function (ev) {
             var _this = this;
             if (!this.touching)
                 return;
@@ -47793,7 +47836,10 @@
             if (!this.startPoint)
                 this.startPoint = curPoint;
             var delta = curPoint[this.target] - this.startPoint[this.target];
+            if (!delta)
+                return;
             // 拖动跟随
+            this.scrolling = true;
             this._scroll(delta, function (toBounce) {
                 if (toBounce) {
                     if (delta > 0) {
@@ -47803,12 +47849,12 @@
                         _this.bouncing = 1;
                     }
                     delta = _this.config.bounceResist(delta);
-                    _this.content[_this.target] += delta;
+                    _this._setPos(delta);
                 }
             });
             this.startPoint = curPoint;
         };
-        PixiScroller.prototype._end = function (ev) {
+        PixiBetterScroller.prototype._end = function (ev) {
             this.touching = false;
             var endPoint = getPoint(ev, 0);
             var endTime = Date.now();
@@ -47826,15 +47872,16 @@
                 this._endScroll(endPoint, deltaT);
             }
         };
-        PixiScroller.prototype._bounceBack = function () {
+        PixiBetterScroller.prototype._bounceBack = function () {
             var _this = this;
             var _back = function (pos) {
-                var end = typeof pos === 'number' ? pos : (_this.bouncing < 0 ? 0 : -_this.maxScrollDis);
-                _this._scrollTo(end, function (pos, isStoped) {
+                var end = _this.bouncing < 0 ? 0 : -_this.maxScrollDis;
+                _this._scrollTo(typeof pos === 'number' ? pos : end, function (pos, isStoped) {
                     if (isStoped) {
                         if (_this.content[_this.target] === end) {
                             _this.bouncing = 0;
                         }
+                        _this.scrolling = false;
                     }
                     else {
                         _this.content[_this.target] = pos;
@@ -47850,7 +47897,7 @@
             }
         };
         // 缓动定点滚动
-        PixiScroller.prototype._scrollTo = function (end, callback) {
+        PixiBetterScroller.prototype._scrollTo = function (end, callback) {
             var _this = this;
             var start = this.content[this.target];
             if (start === end)
@@ -47860,6 +47907,7 @@
                     return false;
                 start = start + (end - start) / _this.config.scrollCurve;
                 if (Math.abs(start - end) < _this.config.minDeltaToStop) {
+                    _this.content[_this.target] = end;
                     callback && callback(end, true);
                     return false;
                 }
@@ -47867,12 +47915,12 @@
                 return true;
             });
         };
-        PixiScroller.prototype._scroll = function (delta, callback) {
+        PixiBetterScroller.prototype._scroll = function (delta, callback) {
             if (callback === void 0) { callback = function (toBounce) { }; }
             if (this.overflow === 'scroll') {
                 var next = this.content[this.target] + delta;
                 if (next <= 0 && next >= -this.maxScrollDis) {
-                    this.content[this.target] += delta;
+                    this._setPos(delta);
                     callback(false);
                     if (this.options.onScroll) {
                         this.options.onScroll(this.content[this.target]);
@@ -47883,47 +47931,60 @@
                 }
             }
         };
-        PixiScroller.prototype._endScroll = function (endPoint, deltaT) {
+        PixiBetterScroller.prototype._endScroll = function (endPoint, deltaT) {
             var _this = this;
             if (!this.touchStartPoint)
                 return;
             var deltaPos = endPoint[this.target] - this.touchStartPoint[this.target];
+            if (!deltaPos)
+                return;
             var speed = deltaPos / deltaT;
             var dpos;
             loop(function (next) {
-                if (_this.touching)
+                // 点击停止惯性滚动
+                if (_this.touching) {
+                    _this.scrolling = false;
                     return;
+                }
                 dpos = speed * 16;
-                _this._scroll(dpos, function (toBounce) {
-                    if (toBounce) {
-                        if (dpos > 0) {
-                            _this.bouncing = -1;
-                        }
-                        else if (dpos < 0) {
-                            _this.bouncing = 1;
-                        }
-                        loop(function () {
-                            if (_this.touching)
-                                return false;
-                            _this.content[_this.target] += dpos;
-                            dpos = _this.config.bounceResist(dpos);
-                            if (Math.abs(dpos) < _this.config.minDeltaToStop) {
-                                _this._bounceBack();
-                                return false;
+                if (Math.abs(dpos) > 1) {
+                    _this._scroll(dpos, function (toBounce) {
+                        if (toBounce) {
+                            if (dpos > 0) {
+                                _this.bouncing = -1;
                             }
-                            else {
-                                return true;
+                            else if (dpos < 0) {
+                                _this.bouncing = 1;
                             }
-                        });
-                    }
-                    else if (Math.abs(dpos) > 1) {
-                        speed = _this.config.speedDecay(speed);
-                        next();
-                    }
-                });
+                            loop(function () {
+                                if (_this.touching)
+                                    return false;
+                                _this._setPos(dpos);
+                                dpos = _this.config.bounceResist(dpos);
+                                if (Math.abs(dpos) < _this.config.minDeltaToStop) {
+                                    _this._bounceBack();
+                                    return false;
+                                }
+                                else {
+                                    return true;
+                                }
+                            });
+                        }
+                        else if (Math.abs(dpos) > 1) {
+                            speed = _this.config.speedDecay(speed);
+                            next();
+                        }
+                    });
+                }
+                else {
+                    _this.scrolling = false;
+                }
             }, false);
         };
-        PixiScroller.prototype.addChild = function (elm, scrollable) {
+        PixiBetterScroller.prototype._setPos = function (delta) {
+            this.content[this.target] += Math.round(delta);
+        };
+        PixiBetterScroller.prototype.addChild = function (elm, scrollable) {
             if (scrollable === void 0) { scrollable = true; }
             if (scrollable) {
                 this.content.addChild(elm);
@@ -47932,6 +47993,9 @@
                 var childLen = this.content[attr];
                 if (childLen > parentLen) {
                     this.maxScrollDis = childLen - parentLen;
+                    if (this.options.overflow !== 'hidden') {
+                        this.overflow = 'scroll';
+                    }
                 }
                 else {
                     this.overflow = 'hidden';
@@ -47941,11 +48005,12 @@
                 this.container.addChild(elm);
             }
         };
-        PixiScroller.prototype.removeChild = function (elm) {
+        PixiBetterScroller.prototype.removeChild = function (elm) {
             this.content.removeChild(elm);
         };
-        return PixiScroller;
+        return PixiBetterScroller;
     }());
+    //# sourceMappingURL=index.js.map
 
     window.PIXI = PIXI;
     function getView() {
@@ -47977,38 +48042,6 @@
         view: getView(),
     });
     game.renderer.resize(iw, ih);
-    var verRect = createRect({
-        width: 180,
-        height: 1000,
-        backgroundColor: '#beebe9',
-    });
-    var _loop_1 = function (i) {
-        var item = createRect({
-            x: 20,
-            y: 15 + 70 * i,
-            width: 140,
-            height: 60,
-            backgroundColor: '#fffdf9',
-        });
-        var text = createText({
-            content: "item - " + i,
-            style: {
-                fill: '#8ac6d1',
-                fontSize: 20,
-            },
-        });
-        text.x = (item.width - text.width) / 2;
-        text.y = (item.height - text.height) / 2;
-        item.addChild(text);
-        item.interactive = true;
-        item.on('tap', function () {
-            console.log("Tap item-" + i);
-        });
-        verRect.addChild(item);
-    };
-    for (var i = 0; i < 14; i++) {
-        _loop_1(i);
-    }
     var ver = createRect({
         width: 180,
         height: 280,
@@ -48017,8 +48050,12 @@
         borderWidth: 2,
         borderColor: '#f35588',
     });
-    game.stage.addChild(ver);
-    var scroller = new PixiScroller({
+    var verRect = createRect({
+        width: 180,
+        height: 1000,
+        backgroundColor: '#beebe9',
+    });
+    var scroller = new PixiBetterScroller({
         direction: 'vertical',
         width: 180,
         height: 280,
@@ -48062,6 +48099,34 @@
             }
         },
     }, ver);
+    var _loop_1 = function (i) {
+        var item = createRect({
+            x: 20,
+            y: 15 + 70 * i,
+            width: 140,
+            height: 60,
+            backgroundColor: '#fffdf9',
+        });
+        var text = createText({
+            content: "item - " + i,
+            style: {
+                fill: '#8ac6d1',
+                fontSize: 20,
+            },
+        });
+        text.x = (item.width - text.width) / 2;
+        text.y = (item.height - text.height) / 2;
+        item.addChild(text);
+        item.interactive = true;
+        item.on('tap', function () {
+            console.log("Tap item-" + i);
+        });
+        verRect.addChild(item);
+    };
+    for (var i = 0; i < 14; i++) {
+        _loop_1(i);
+    }
+    game.stage.addChild(ver);
     var refresh = createText({
         content: 'Refresh',
         x: 66,
@@ -48099,6 +48164,19 @@
         borderColor: '#f35588',
     });
     game.stage.addChild(hor);
+    var scroller1 = new PixiBetterScroller({
+        direction: 'horizontal',
+        width: 260,
+        height: 160,
+        onScroll: function (pos) {
+            // console.log('scroll', pos)
+        },
+        onBounce: function (direction, next) {
+            // console.log('onBounce', direction)
+            next();
+        },
+    }, hor);
+    scroller1.addChild(horRect);
     var _loop_2 = function (i) {
         var item = createRect({
             y: 20,
@@ -48119,26 +48197,15 @@
         item.addChild(text);
         item.interactive = true;
         item.on('tap', function () {
-            console.log("Tap item-" + i);
+            if (!scroller1.scrolling) {
+                console.log("Tap item-" + i);
+            }
         });
         horRect.addChild(item);
     };
     for (var i = 0; i < 14; i++) {
         _loop_2(i);
     }
-    var scroller1 = new PixiScroller({
-        direction: 'horizontal',
-        width: 260,
-        height: 160,
-        onScroll: function (pos) {
-            console.log('scroll', pos);
-        },
-        onBounce: function (direction, next) {
-            console.log('onBounce', direction);
-            next();
-        },
-    }, hor);
-    scroller1.addChild(horRect);
     function createRect(ops) {
         var _a = ops.width, width = _a === void 0 ? 0 : _a, _b = ops.height, height = _b === void 0 ? 0 : _b, backgroundColor = ops.backgroundColor, _c = ops.backgroundAlpha, backgroundAlpha = _c === void 0 ? 1 : _c, _d = ops.borderWidth, borderWidth = _d === void 0 ? 0 : _d, _e = ops.borderColor, borderColor = _e === void 0 ? 0x000000 : _e, _f = ops.borderRadius, props = __rest(ops, ["width", "height", "backgroundColor", "backgroundAlpha", "borderWidth", "borderColor", "borderRadius"]);
         var rect = new Graphics();
@@ -48181,6 +48248,7 @@
         extend(text, props);
         return text;
     }
+    //# sourceMappingURL=index.js.map
 
     exports.createRect = createRect;
     exports.createText = createText;

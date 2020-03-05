@@ -13,10 +13,10 @@ npm i pixi-better-scroller
 ## usage
     
 ```js
-import PixiScroller from 'pixi-better-scroller'
+import PixiBetterScroller from 'pixi-better-scroller'
 
 // init the scroller
-const scroller = new PixiScroller({
+const scroller = new PixiBetterScroller({
     direction: 'vertical',
     width: 260,
     height: 160,
@@ -35,7 +35,7 @@ scroller.addChild(context)
 
 ## api
 
-### `- new PixiScroller(IOptions, parent)`
+### `- new PixiBetterScroller(IOptions, parent)`
 
 create the instance of scroller.
 

@@ -1,5 +1,5 @@
 import { Container, Graphics } from 'pixi.js'
-import { is, getPoint, loop, requestAnimateFrame, extend } from './utils'
+import { is, getPoint, loop, extend } from './utils'
 
 // 挟持的原生事件
 const ORIGIN_EVENT_MAP = [{
@@ -22,7 +22,7 @@ const ORIGIN_EVENT_MAP = [{
     fn: '_end',
 }]
 
-export default class PixiScroller {
+export default class PixiBetterScroller {
     public options: PScroller.IOps
     public direction = 'vertical'
     public width: number = 500
@@ -45,6 +45,8 @@ export default class PixiScroller {
     private startPoint: PScroller.Point | null
     private startTime: number
     private bouncing: -1 | 1 | 0 = 0
+
+    public scrolling: boolean = false
 
     public config = {
         // 触发惯性滚动的 触摸时间上限
@@ -132,8 +134,10 @@ export default class PixiScroller {
 
         if (!this.startPoint) this.startPoint = curPoint
         let delta = curPoint[this.target] - this.startPoint[this.target]
+        if (!delta) return
 
         // 拖动跟随
+        this.scrolling = true
         this._scroll(delta, (toBounce) => {
             if (toBounce) {
                 if (delta > 0) {
@@ -142,10 +146,9 @@ export default class PixiScroller {
                     this.bouncing = 1
                 }
                 delta = this.config.bounceResist(delta)
-                this.content[this.target] += delta
+                this._setPos(delta)
             }
         })
-
         this.startPoint = curPoint
     }
     public _end(ev) {
@@ -170,12 +173,13 @@ export default class PixiScroller {
     }
     private _bounceBack() {
         const _back = (pos?) => {
-            const end = typeof pos === 'number' ? pos : (this.bouncing < 0 ? 0 : -this.maxScrollDis)
-            this._scrollTo(end, (pos, isStoped) => {
+            const end = this.bouncing < 0 ? 0 : -this.maxScrollDis
+            this._scrollTo(typeof pos === 'number' ? pos : end, (pos, isStoped) => {
                 if (isStoped) {
                     if (this.content[this.target] === end) {
                         this.bouncing = 0
                     }
+                    this.scrolling = false
                 } else {
                     this.content[this.target] = pos
                 }
@@ -198,6 +202,7 @@ export default class PixiScroller {
 
             start = start + (end - start) / this.config.scrollCurve
             if (Math.abs(start - end) < this.config.minDeltaToStop) {
+                this.content[this.target] = end
                 callback && callback(end, true)
                 return false
             }
@@ -209,7 +214,7 @@ export default class PixiScroller {
         if (this.overflow === 'scroll') {
             const next = this.content[this.target] + delta
             if (next <= 0 && next >= -this.maxScrollDis) {
-                this.content[this.target] += delta
+                this._setPos(delta)
                 callback(false)
 
                 if (this.options.onScroll) {
@@ -223,39 +228,52 @@ export default class PixiScroller {
     private _endScroll(endPoint, deltaT) {
         if (!this.touchStartPoint) return
         const deltaPos = endPoint[this.target] - this.touchStartPoint[this.target]
-
+        
+        if (!deltaPos) return
         let speed = deltaPos / deltaT
 
         let dpos
         loop((next) => {
-            if (this.touching) return
+            // 点击停止惯性滚动
+            if (this.touching) {
+                this.scrolling = false
+                return
+            }
             dpos = speed * 16
-            this._scroll(dpos, (toBounce) => {
-                if (toBounce) {
-                    if (dpos > 0) {
-                        this.bouncing = -1
-                    } else if (dpos < 0) {
-                        this.bouncing = 1
-                    }
 
-                    loop(() => {
-                        if (this.touching) return false
-
-                        this.content[this.target] += dpos
-                        dpos = this.config.bounceResist(dpos)
-                        if (Math.abs(dpos) < this.config.minDeltaToStop) {
-                            this._bounceBack()
-                            return false
-                        } else {
-                            return true
+            if (Math.abs(dpos) > 1) {
+                this._scroll(dpos, (toBounce) => {
+                    if (toBounce) {
+                        if (dpos > 0) {
+                            this.bouncing = -1
+                        } else if (dpos < 0) {
+                            this.bouncing = 1
                         }
-                    })
-                } else if (Math.abs(dpos) > 1)  {
-                    speed = this.config.speedDecay(speed)
-                    next()
-                }
-            })
+    
+                        loop(() => {
+                            if (this.touching) return false
+    
+                            this._setPos(dpos)
+                            dpos = this.config.bounceResist(dpos)
+                            if (Math.abs(dpos) < this.config.minDeltaToStop) {
+                                this._bounceBack()
+                                return false
+                            } else {
+                                return true
+                            }
+                        })
+                    } else if (Math.abs(dpos) > 1)  {
+                        speed = this.config.speedDecay(speed)
+                        next()
+                    }
+                })
+            } else {
+                this.scrolling = false
+            }
         }, false)
+    }
+    private _setPos(delta) {
+        this.content[this.target] += Math.round(delta)
     }
     public addChild(elm, scrollable: boolean = true) {
         if (scrollable) {
@@ -266,6 +284,9 @@ export default class PixiScroller {
     
             if (childLen > parentLen) {
                 this.maxScrollDis = childLen - parentLen
+                if (this.options.overflow !== 'hidden') {
+                    this.overflow = 'scroll'
+                }
             } else {
                 this.overflow = 'hidden'
             }
