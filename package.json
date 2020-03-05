@@ -1,6 +1,6 @@
 {
 	"name": "pixi-better-scroller",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "a nice, simple scroller container which has the inertia scrolling, bounce scrolling and drag scrolling, as the ios system's scroller.",
 	"keywords": [
 		"scroll",
@@ -9,9 +9,9 @@
 		"pixi-scroller",
 		"pixi-scrollbox"
 	],
-	"main": "dist/pixi-scroll.js",
-	"module": "dist/pixi-scroll.es.js",
-	"moduleName": "PixiScroller",
+	"main": "dist/pixi-better-scroller.js",
+	"module": "dist/pixi-better-scroller.es.js",
+	"moduleName": "PixiBetterScroller",
 	"scripts": {
 		"reload": "./node_modules/.bin/livereload 'example/'",
 		"watch": "NODE_ENV=example rollup -w -c rollup.config.js",
@@ -22,7 +22,7 @@
 		"publish": "rm -rf dist && npm-run-all --parallel es pre prod"
 	},
 	"repository": {
-		"url": "https://github.com/xd-tayde/pixi-scroll",
+		"url": "https://github.com/xd-tayde/pixi-better-scroller",
 		"type": "git"
 	},
 	"author": "gxd",
@@ -64,8 +64,7 @@
 		"typescript": "^3.4.5"
 	},
 	"dependencies": {
-		"colornames": "^1.1.1",
-		"pixi.js": "^5.2.1"
+		"colornames": "^1.1.1"
 	},
 	"peerDependencies": {
 		"pixi.js": "^5.2.1"

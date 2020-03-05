@@ -65,7 +65,7 @@ const Config = {
         intro: isExample ? `document.write('<script src="http://' + (location.host || "localhost").split(":")[0] + ':35729/livereload.js?snipver=1"></' + "script>")` : '',
         // 可自行配置库的全局变量
         globals: {
-            // react: 'React',
+            'pixi.js': 'PIXI',
         },
     },
     context: 'window',

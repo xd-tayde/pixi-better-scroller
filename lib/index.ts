@@ -1,30 +1,6 @@
 import { Container, Graphics } from 'pixi.js'
 import { is, getPoint, loop, requestAnimateFrame, extend } from './utils'
 
-interface IConfig {
-    timeForEndScroll?: number,
-    // 定点滚动曲线
-    scrollCurve?: number,
-    // 触发滚动停止的最小变动值
-    minDeltaToStop?: number,  
-    // 惯性滚动的速度衰减
-    speedDecay?: (speed) => number,
-    // 弹性拉动衰减
-    bounceResist?: (delta) => number,
-}
-
-interface IOps {
-    width?: number,
-    height?: number,
-    x?: number,
-    y?: number,
-    direction?: 'horizontal' | 'vertical',
-    overflow?: 'scroll' | 'hidden',
-    config?: IConfig,
-    onScroll?: (pos: number) => void
-    onBounce?: (direction: -1 | 1 | 0, next: (pos?: number) => void, pos: number) => void
-}
-
 // 挟持的原生事件
 const ORIGIN_EVENT_MAP = [{
     name: 'pointerdown',
@@ -47,7 +23,7 @@ const ORIGIN_EVENT_MAP = [{
 }]
 
 export default class PixiScroller {
-    public options: IOps
+    public options: PScroller.IOps
     public direction = 'vertical'
     public width: number = 500
     public height: number = 500
@@ -95,7 +71,7 @@ export default class PixiScroller {
             return delta * rate
         },
     }
-    constructor(options: IOps = {}, parent?) {
+    constructor(options: PScroller.IOps = {}, parent?) {
         this.options = options
         this.parent = parent;
 

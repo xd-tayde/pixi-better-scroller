@@ -100,9 +100,18 @@ interface IConfig {
 }
 ```
 
-### `- scroller.addChild(elm)`
+### `- scroller.addChild(elm, scrollable: boolean)`
 
 add pixi element into the scroller.
+
+```js
+/**
+ * @param elm: pixi element
+ * @param scrollable?: boolean
+ * tips: not scrollable element will be bottom by default, you can set zIndex to up.
+ */
+scroller.addChild(elm, scrollable?)
+```
 
 ### `- scroller.removeChild(elm?)`
 
