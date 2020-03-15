@@ -50,7 +50,7 @@ interface IOptions {
     y?: number,
     
     // scroll direction
-    direction?: 'horizontal' | 'vertical',
+    direction?: 'horizontal' | 'vertical' | 'ver' | 'hor',
     
     overflow?: 'scroll' | 'hidden',
     
@@ -108,7 +108,7 @@ add pixi element into the scroller.
 /**
  * @param elm: pixi element
  * @param scrollable?: boolean
- * tips: not scrollable element will be bottom by default, you can set zIndex to up.
+ * tips: not scrollable element will be bottom (zIndex) by default, you can set zIndex to up.
  */
 scroller.addChild(elm, scrollable?)
 ```

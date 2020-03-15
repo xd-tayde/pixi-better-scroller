@@ -22,9 +22,14 @@ const ORIGIN_EVENT_MAP = [{
     fn: '_end',
 }]
 
+function isVer(direction: PScroller.IOps['direction']) {
+    if (!direction) return true
+    return !['horizontal', 'hor'].includes(direction)
+}
+
 export default class PixiBetterScroller {
     public options: PScroller.IOps
-    public direction = 'vertical'
+    public direction: PScroller.IOps['direction'] = 'vertical'
     public width: number = 500
     public height: number = 500
     public x: number = 0
@@ -63,7 +68,7 @@ export default class PixiBetterScroller {
             if (this.bouncing < 0) {
                 rate = 0.8 - this.content[this.target] * 0.005
             } else if (this.bouncing > 0) {
-                const attr = this.direction === 'vertical' ? 'height' : 'width'
+                const attr = isVer(this.direction) ? 'height' : 'width'
                 const parentLen = this[attr]
                 const childLen = this.content[attr]
                 rate = 0.8 - (parentLen - this.content[this.target] - childLen) * 0.005
@@ -81,12 +86,10 @@ export default class PixiBetterScroller {
             if (!is.undef(options[attr])) this[attr] = options[attr]
         })
 
-        if (this.direction === 'horizontal') {
-            this.target = 'x'
-        } else if (this.direction === 'vertical') {
+        if (isVer(this.direction)) {
             this.target = 'y'
         } else {
-            console.error(`the direction only support horizontal or vertical, now value is ${this.direction}`)
+            this.target = 'x'
         }
 
         this.config = extend(this.config, this.options.config)
@@ -278,7 +281,7 @@ export default class PixiBetterScroller {
     public addChild(elm, scrollable: boolean = true) {
         if (scrollable) {
             this.content.addChild(elm)   
-            const attr = this.direction === 'vertical' ? 'height' : 'width'
+            const attr = isVer(this.direction) ? 'height' : 'width'
             const parentLen = this[attr]
             const childLen = this.content[attr]
     
@@ -287,7 +290,7 @@ export default class PixiBetterScroller {
                 if (this.options.overflow !== 'hidden') {
                     this.overflow = 'scroll'
                 }
-            } else {
+            } else if (this.options.overflow !== 'scroll') {
                 this.overflow = 'hidden'
             }
         } else {

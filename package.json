@@ -1,6 +1,6 @@
 {
 	"name": "pixi-better-scroller",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "a nice, simple scroller container which has the inertia scrolling, bounce scrolling and drag scrolling, as the ios system's scroller.",
 	"keywords": [
 		"scroll",
@@ -12,6 +12,7 @@
 	"main": "dist/pixi-better-scroller.js",
 	"module": "dist/pixi-better-scroller.es.js",
 	"moduleName": "PixiBetterScroller",
+	"types": "./lib/types.d.ts",
 	"scripts": {
 		"reload": "./node_modules/.bin/livereload 'example/'",
 		"watch": "NODE_ENV=example rollup -w -c rollup.config.js",

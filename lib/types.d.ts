@@ -42,7 +42,7 @@ declare namespace PScroller {
         height?: number,
         x?: number,
         y?: number,
-        direction?: 'horizontal' | 'vertical',
+        direction?: 'horizontal' | 'vertical' | 'ver' | 'hor',
         overflow?: 'scroll' | 'hidden',
         config?: IConfig,
         onScroll?: (pos: number) => void
