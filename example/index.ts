@@ -151,7 +151,7 @@ scroller.addChild(verRect)
 // -----------
 // 水平
 const horRect = createRect({
-    width: 200,
+    width: 1300,
     height: 160,
     backgroundColor: '#beebe9',
 })
@@ -168,7 +168,7 @@ game.stage.addChild(hor)
 
 const scroller1 = new PixiBetterScroller({
     direction: 'horizontal',
-    overflow: 'hidden',
+    overflow: 'scroll',
     width: 260,
     height: 160,
     onScroll(pos) {
@@ -181,7 +181,7 @@ const scroller1 = new PixiBetterScroller({
 }, hor)
 scroller1.addChild(horRect)
 
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 14; i++) {
     const item = createRect({
         y: 20,
         x: 15 + 90 * i,

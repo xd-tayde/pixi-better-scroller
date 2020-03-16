@@ -51,11 +51,11 @@ declare namespace PScroller {
 }
 
 declare module 'pixi-better-scroller' {
-    export class PixiBetterScroller {
+    export default class PixiBetterScroller {
         content: any
         scrolling: boolean
         constructor(options: PScroller.IOps, parent: any)
-        addChild(elm: any, scrollable: boolean)
+        addChild(elm: any, scrollable?: boolean)
         removeChild(elm)
     }
 }

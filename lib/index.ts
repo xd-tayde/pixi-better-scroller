@@ -43,6 +43,7 @@ export default class PixiBetterScroller {
 
     public container: Container
     public content: Container
+    public static: Container
     public mask: Graphics
 
     private touching: boolean = false
@@ -97,11 +98,16 @@ export default class PixiBetterScroller {
     }
     private init() {
         this.container = new Container()
-        this.container.addChild(this.content = new Container())
         this.container.x = this.x
         this.container.y = this.y
         this.container.sortableChildren = true
         this.container.name = 'Scroller'
+
+        this.container.addChild(this.static = new Container())
+        this.static.name = 'Static'
+        this.static.zIndex = 1
+
+        this.container.addChild(this.content = new Container())
         this.content.name = 'Context'
         this.content.zIndex = 9
 
@@ -294,10 +300,16 @@ export default class PixiBetterScroller {
                 this.overflow = 'hidden'
             }
         } else {
-            this.container.addChild(elm)
+            this.static.addChild(elm)
         }
     }
     public removeChild(elm) {
-        this.content.removeChild(elm)
+        if (elm) {
+            this.content.removeChild(elm)
+            this.static.removeChild(elm)
+        } else {
+            this.static.removeChildren()
+            this.content.removeChildren()
+        }
     }
 }

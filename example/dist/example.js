@@ -47796,11 +47796,14 @@
         }
         PixiBetterScroller.prototype.init = function () {
             this.container = new Container();
-            this.container.addChild(this.content = new Container());
             this.container.x = this.x;
             this.container.y = this.y;
             this.container.sortableChildren = true;
             this.container.name = 'Scroller';
+            this.container.addChild(this.static = new Container());
+            this.static.name = 'Static';
+            this.static.zIndex = 1;
+            this.container.addChild(this.content = new Container());
             this.content.name = 'Context';
             this.content.zIndex = 9;
             if (this.parent && this.parent.addChild) {
@@ -48004,11 +48007,18 @@
                 }
             }
             else {
-                this.container.addChild(elm);
+                this.static.addChild(elm);
             }
         };
         PixiBetterScroller.prototype.removeChild = function (elm) {
-            this.content.removeChild(elm);
+            if (elm) {
+                this.content.removeChild(elm);
+                this.static.removeChild(elm);
+            }
+            else {
+                this.static.removeChildren();
+                this.content.removeChildren();
+            }
         };
         return PixiBetterScroller;
     }());
@@ -48153,7 +48163,7 @@
     // -----------
     // 水平
     var horRect = createRect({
-        width: 200,
+        width: 1300,
         height: 160,
         backgroundColor: '#beebe9',
     });
@@ -48168,7 +48178,7 @@
     game.stage.addChild(hor);
     var scroller1 = new PixiBetterScroller({
         direction: 'horizontal',
-        overflow: 'hidden',
+        overflow: 'scroll',
         width: 260,
         height: 160,
         onScroll: function (pos) {
@@ -48206,7 +48216,7 @@
         });
         horRect.addChild(item);
     };
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < 14; i++) {
         _loop_2(i);
     }
     function createRect(ops) {
@@ -48251,7 +48261,6 @@
         extend(text, props);
         return text;
     }
-    //# sourceMappingURL=index.js.map
 
     exports.createRect = createRect;
     exports.createText = createText;
