@@ -47847,12 +47847,7 @@
             this.scrolling = true;
             this._scroll(delta, function (toBounce) {
                 if (toBounce) {
-                    if (delta > 0) {
-                        _this.bouncing = -1;
-                    }
-                    else if (delta < 0) {
-                        _this.bouncing = 1;
-                    }
+                    _this.bouncing = toBounce;
                     delta = _this.config.bounceResist(delta);
                     _this._setPos(delta);
                 }
@@ -47931,8 +47926,11 @@
                         this.options.onScroll(this.content[this.target]);
                     }
                 }
-                else {
-                    callback(true);
+                else if (next <= 0) {
+                    callback(1);
+                }
+                else if (next >= -this.maxScrollDis) {
+                    callback(-1);
                 }
             }
         };
@@ -47955,12 +47953,7 @@
                 if (Math.abs(dpos) > 1) {
                     _this._scroll(dpos, function (toBounce) {
                         if (toBounce) {
-                            if (dpos > 0) {
-                                _this.bouncing = -1;
-                            }
-                            else if (dpos < 0) {
-                                _this.bouncing = 1;
-                            }
+                            _this.bouncing = toBounce;
                             loop(function () {
                                 if (_this.touching)
                                     return false;
@@ -48018,6 +48011,25 @@
             else {
                 this.static.removeChildren();
                 this.content.removeChildren();
+            }
+        };
+        PixiBetterScroller.prototype.scrollTo = function (end, hasAnima) {
+            var _this = this;
+            if (hasAnima === void 0) { hasAnima = true; }
+            if (hasAnima) {
+                this._scrollTo(-end, function (pos, isStoped) {
+                    var delta = pos - _this.content[_this.target];
+                    _this._scroll(delta, function (toBounce) {
+                        _this.content[_this.target] = pos;
+                        if (isStoped && toBounce) {
+                            _this.bouncing = toBounce;
+                            _this._bounceBack();
+                        }
+                    });
+                });
+            }
+            else {
+                this.content[this.target] = -end;
             }
         };
         return PixiBetterScroller;
@@ -48219,6 +48231,9 @@
     for (var i = 0; i < 14; i++) {
         _loop_2(i);
     }
+    setTimeout(function () {
+        scroller1.scrollTo(horRect.width - 260 + 200, false);
+    }, 1000);
     function createRect(ops) {
         var _a = ops.width, width = _a === void 0 ? 0 : _a, _b = ops.height, height = _b === void 0 ? 0 : _b, backgroundColor = ops.backgroundColor, _c = ops.backgroundAlpha, backgroundAlpha = _c === void 0 ? 1 : _c, _d = ops.borderWidth, borderWidth = _d === void 0 ? 0 : _d, _e = ops.borderColor, borderColor = _e === void 0 ? 0x000000 : _e, _f = ops.borderRadius, props = __rest(ops, ["width", "height", "backgroundColor", "backgroundAlpha", "borderWidth", "borderColor", "borderRadius"]);
         var rect = new Graphics();

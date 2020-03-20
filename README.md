@@ -117,6 +117,18 @@ scroller.addChild(elm, scrollable?)
 
 remove pixi element from scroller.
 
+### `- scroller.scrollTo(end, hasAnima?)`
+
+scroller scroll to end position.
+
+```js
+/**
+ * @param end: number
+ * @param hasAnima?: boolean
+ */
+scroller.scrollTo(end, hasAnima?)
+```
+
 ### `- scroller.container`
 
 the pixi container of scroller.

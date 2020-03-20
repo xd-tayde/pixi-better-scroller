@@ -149,11 +149,7 @@ export default class PixiBetterScroller {
         this.scrolling = true
         this._scroll(delta, (toBounce) => {
             if (toBounce) {
-                if (delta > 0) {
-                    this.bouncing = -1
-                } else if (delta < 0) {
-                    this.bouncing = 1
-                }
+                this.bouncing = toBounce
                 delta = this.config.bounceResist(delta)
                 this._setPos(delta)
             }
@@ -205,10 +201,8 @@ export default class PixiBetterScroller {
     private _scrollTo(end: number, callback?) {
         let start = this.content[this.target]
         if (start === end) return
-
         loop(() => {
             if (this.touching) return false
-
             start = start + (end - start) / this.config.scrollCurve
             if (Math.abs(start - end) < this.config.minDeltaToStop) {
                 this.content[this.target] = end
@@ -229,8 +223,10 @@ export default class PixiBetterScroller {
                 if (this.options.onScroll) {
                     this.options.onScroll(this.content[this.target])
                 }
-            } else {
-                callback(true)
+            } else if (next <= 0) {
+                callback(1)
+            } else if (next >= -this.maxScrollDis) {
+                callback(-1)
             }
         }
     }
@@ -253,11 +249,7 @@ export default class PixiBetterScroller {
             if (Math.abs(dpos) > 1) {
                 this._scroll(dpos, (toBounce) => {
                     if (toBounce) {
-                        if (dpos > 0) {
-                            this.bouncing = -1
-                        } else if (dpos < 0) {
-                            this.bouncing = 1
-                        }
+                        this.bouncing = toBounce
     
                         loop(() => {
                             if (this.touching) return false
@@ -310,6 +302,22 @@ export default class PixiBetterScroller {
         } else {
             this.static.removeChildren()
             this.content.removeChildren()
+        }
+    }
+    public scrollTo(end, hasAnima: boolean = true) {
+        if (hasAnima) {
+            this._scrollTo(-end, (pos, isStoped) => {
+                const delta = pos - this.content[this.target]
+                this._scroll(delta, (toBounce) => {
+                    this.content[this.target] = pos
+                    if (isStoped && toBounce) {
+                        this.bouncing = toBounce
+                        this._bounceBack()
+                    }
+                })
+            })
+        } else {
+            this.content[this.target] = -end
         }
     }
 }
