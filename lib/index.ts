@@ -1,5 +1,6 @@
 import { Container, Graphics } from 'pixi.js'
 import { is, getPoint, loop, extend } from './utils'
+import { createRect } from 'example'
 
 // 挟持的原生事件
 const ORIGIN_EVENT_MAP = [{

@@ -48231,9 +48231,6 @@
     for (var i = 0; i < 14; i++) {
         _loop_2(i);
     }
-    setTimeout(function () {
-        scroller1.scrollTo(horRect.width - 260 + 200, false);
-    }, 1000);
     function createRect(ops) {
         var _a = ops.width, width = _a === void 0 ? 0 : _a, _b = ops.height, height = _b === void 0 ? 0 : _b, backgroundColor = ops.backgroundColor, _c = ops.backgroundAlpha, backgroundAlpha = _c === void 0 ? 1 : _c, _d = ops.borderWidth, borderWidth = _d === void 0 ? 0 : _d, _e = ops.borderColor, borderColor = _e === void 0 ? 0x000000 : _e, _f = ops.borderRadius, props = __rest(ops, ["width", "height", "backgroundColor", "backgroundAlpha", "borderWidth", "borderColor", "borderRadius"]);
         var rect = new Graphics();

@@ -56,6 +56,7 @@ declare module 'pixi-better-scroller' {
         scrolling: boolean
         constructor(options: PScroller.IOps, parent: any)
         addChild(elm: any, scrollable?: boolean)
-        removeChild(elm)
+        removeChild(elm: any)
+        scrollTo(end: number, hasAnima?: boolean)
     }
 }
