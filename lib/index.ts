@@ -30,16 +30,19 @@ function isVer(direction: PScroller.IOps['direction']) {
 
 export default class PixiBetterScroller {
     public options: PScroller.IOps
+
     public direction: PScroller.IOps['direction'] = 'vertical'
     public width: number = 500
     public height: number = 500
     public x: number = 0
     public y: number = 0
+    public radius: number = 0
+    public overflow: 'scroll' | 'hidden' = 'scroll'
+
     public parent
 
     private target = 'x'
 
-    public overflow: 'scroll' | 'hidden' = 'scroll'
     private maxScrollDis: number = 0
 
     public container: Container
@@ -84,7 +87,7 @@ export default class PixiBetterScroller {
         this.options = options
         this.parent = parent;
 
-        ['x', 'y', 'width', 'height', 'direction', 'overflow'].map((attr) => {
+        ['x', 'y', 'width', 'height', 'direction', 'overflow', 'radius'].map((attr) => {
             if (!is.undef(options[attr])) this[attr] = options[attr]
         })
 
@@ -122,7 +125,11 @@ export default class PixiBetterScroller {
     private _createMask() {
         const mask = new Graphics()
         mask.beginFill(0xFFFFFF, 1)
-        mask.drawRect(0, 0, this.width, this.height)
+        if (this.radius) {
+            mask.drawRoundedRect(0, 0, this.width, this.height, this.radius)
+        } else {
+            mask.drawRect(0, 0, this.width, this.height)
+        }
         mask.endFill()
         this.container.addChild(this.mask = mask)
         this.container.mask = mask
@@ -304,6 +311,9 @@ export default class PixiBetterScroller {
             this.static.removeChildren()
             this.content.removeChildren()
         }
+    }
+    public destroy() {
+        this.parent.removeChild(this.container)
     }
     public scrollTo(end, hasAnima: boolean = true) {
         if (hasAnima) {

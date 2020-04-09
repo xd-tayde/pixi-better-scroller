@@ -57,6 +57,7 @@ const scroller = new PixiBetterScroller({
     direction: 'vertical',
     width: 180,
     height: 280,
+    radius: 10,
     onBounce(direction, back, pos) {
         console.log('pos', pos)
         if (direction < 0) {
@@ -168,7 +169,6 @@ game.stage.addChild(hor)
 
 const scroller1 = new PixiBetterScroller({
     direction: 'horizontal',
-    overflow: 'scroll',
     width: 260,
     height: 160,
     onScroll(pos) {

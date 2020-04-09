@@ -47746,8 +47746,9 @@
             this.height = 500;
             this.x = 0;
             this.y = 0;
-            this.target = 'x';
+            this.radius = 0;
             this.overflow = 'scroll';
+            this.target = 'x';
             this.maxScrollDis = 0;
             this.touching = false;
             this.bouncing = 0;
@@ -47781,7 +47782,7 @@
             };
             this.options = options;
             this.parent = parent;
-            ['x', 'y', 'width', 'height', 'direction', 'overflow'].map(function (attr) {
+            ['x', 'y', 'width', 'height', 'direction', 'overflow', 'radius'].map(function (attr) {
                 if (!is.undef(options[attr]))
                     _this[attr] = options[attr];
             });
@@ -47815,7 +47816,12 @@
         PixiBetterScroller.prototype._createMask = function () {
             var mask = new Graphics();
             mask.beginFill(0xFFFFFF, 1);
-            mask.drawRect(0, 0, this.width, this.height);
+            if (this.radius) {
+                mask.drawRoundedRect(0, 0, this.width, this.height, this.radius);
+            }
+            else {
+                mask.drawRect(0, 0, this.width, this.height);
+            }
             mask.endFill();
             this.container.addChild(this.mask = mask);
             this.container.mask = mask;
@@ -48013,6 +48019,9 @@
                 this.content.removeChildren();
             }
         };
+        PixiBetterScroller.prototype.destroy = function () {
+            this.parent.removeChild(this.container);
+        };
         PixiBetterScroller.prototype.scrollTo = function (end, hasAnima) {
             var _this = this;
             if (hasAnima === void 0) { hasAnima = true; }
@@ -48083,6 +48092,7 @@
         direction: 'vertical',
         width: 180,
         height: 280,
+        radius: 10,
         onBounce: function (direction, back, pos) {
             console.log('pos', pos);
             if (direction < 0) {
@@ -48190,7 +48200,6 @@
     game.stage.addChild(hor);
     var scroller1 = new PixiBetterScroller({
         direction: 'horizontal',
-        overflow: 'scroll',
         width: 260,
         height: 160,
         onScroll: function (pos) {
@@ -48273,6 +48282,7 @@
         extend(text, props);
         return text;
     }
+    //# sourceMappingURL=index.js.map
 
     exports.createRect = createRect;
     exports.createText = createText;

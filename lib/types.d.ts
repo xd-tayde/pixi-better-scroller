@@ -44,6 +44,7 @@ declare namespace PScroller {
         y?: number,
         direction?: 'horizontal' | 'vertical' | 'ver' | 'hor',
         overflow?: 'scroll' | 'hidden',
+        radius?: number,
         config?: IConfig,
         onScroll?: (pos: number) => void
         onBounce?: (direction: -1 | 1 | 0, next: (pos?: number) => void, pos: number) => void
@@ -52,11 +53,24 @@ declare namespace PScroller {
 
 declare module 'pixi-better-scroller' {
     export default class PixiBetterScroller {
-        content: any
+        container: PIXI.Container
+        content: PIXI.Container
+        static: PIXI.Container
+        mask: PIXI.Graphics
+        parent: any
+
         scrolling: boolean
+        direction: PScroller.IOps['direction']
+        width: number
+        height: number
+        x: number
+        y: number
+        radius: number
+        overflow: 'scroll' | 'hidden'
         constructor(options: PScroller.IOps, parent: any)
         addChild(elm: any, scrollable?: boolean)
         removeChild(elm: any)
+        destroy()
         scrollTo(end: number, hasAnima?: boolean)
     }
 }
