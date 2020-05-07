@@ -42,6 +42,7 @@ export default class PixiBetterScroller {
     public parent
 
     private target = 'x'
+    private antiTarget = 'y'
 
     private maxScrollDis: number = 0
 
@@ -67,6 +68,12 @@ export default class PixiBetterScroller {
         minDeltaToStop: 0.3,
         // 惯性滚动的速度衰减
         speedDecay: (speed) => speed - speed * 0.02,
+        // 反向阻碍系数
+        // 当反向增量 > 正向增量时，则阻止滚动
+        //      false: 不阻止
+        //      true: 反向增量 > 正向增量，则阻止滚动
+        //      number:  反向增量 + n > 正向增量，则阻止滚动
+        antiFactor: false,
         // 弹性拉动衰减
         bounceResist: (delta) => {
             let rate
@@ -93,8 +100,10 @@ export default class PixiBetterScroller {
 
         if (isVer(this.direction)) {
             this.target = 'y'
+            this.antiTarget = 'x'
         } else {
             this.target = 'x'
+            this.antiTarget = 'y'
         }
 
         this.config = extend(this.config, this.options.config)
@@ -131,8 +140,7 @@ export default class PixiBetterScroller {
             mask.drawRect(0, 0, this.width, this.height)
         }
         mask.endFill()
-        this.container.addChild(this.mask = mask)
-        this.container.mask = mask
+        this.container.addChild(this.container.mask = this.mask = mask)
     }
     private _bindOriginEvent() {
         this.container.interactive = true
@@ -151,7 +159,18 @@ export default class PixiBetterScroller {
 
         if (!this.startPoint) this.startPoint = curPoint
         let delta = curPoint[this.target] - this.startPoint[this.target]
+        const antiDelta = curPoint[this.antiTarget] - this.startPoint[this.antiTarget]
+
         if (!delta) return
+
+        // 反向阻碍
+        const { antiFactor } = this.config
+        if (antiFactor !== false) {
+            const anti = is.num(antiFactor) ? antiFactor : 0
+            if (Math.abs(antiDelta) + anti >= Math.abs(delta)) {
+                return
+            }
+        }
 
         // 拖动跟随
         this.scrolling = true

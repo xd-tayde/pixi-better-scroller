@@ -35,6 +35,8 @@ declare namespace PScroller {
         speedDecay?: (speed) => number,
         // 弹性拉动衰减
         bounceResist?: (delta) => number,
+        // 反向
+        antiFactor?: boolean | number,
     }
     
     interface IOps {

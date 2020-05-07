@@ -90,12 +90,20 @@ interface IConfig {
     // unit: px, default: 0.3
     minDeltaToStop?: number,  
     
+    // reverse direction factor to prevent scroll
+    //      false: close this rule
+    //      true: when antiDelta > delta, prevent scroll
+    //      number: when antiDelta + n > delta, prevent scroll
+    antiFactor?: boolean | number,
+
     // the speed attenuation of inertia scrolling
     // default: speed - speed * 0.02
     speedDecay?: (speed) => number,
     
     // the resistion of bounce
     bounceResist?: (delta) => number,
+
+
     
 }
 ```

@@ -1,5 +1,8 @@
 # ChangeLog
 
+- [0.1.1]
+    - 新增: config.antiFactor 反向阻碍系数
+
 - [0.1.0]
     - 新增: destroy 方法；
     - 新增: radius 参数，可设置区域圆角；

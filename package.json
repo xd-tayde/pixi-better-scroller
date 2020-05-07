@@ -1,6 +1,6 @@
 {
 	"name": "pixi-better-scroller",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "a nice, simple scroller container which has the inertia scrolling, bounce scrolling and drag scrolling, as the ios system's scroller.",
 	"keywords": [
 		"scroll",
@@ -26,7 +26,7 @@
 		"url": "https://github.com/xd-tayde/pixi-better-scroller",
 		"type": "git"
 	},
-	"author": "gxd",
+	"author": "gxd[https://github.com/xd-tayde]",
 	"license": "MIT",
 	"devDependencies": {
 		"@babel/core": "^7.4.0",

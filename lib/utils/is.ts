@@ -21,6 +21,9 @@ export const is = {
     array(tar: any): tar is any[] {
         return type(tar) === 'array'
     },
+    num(tar: any): tar is number {
+        return type(tar) === 'number'
+    },
     str(tar: any): tar is string {
         return type(tar) === 'string'
     },

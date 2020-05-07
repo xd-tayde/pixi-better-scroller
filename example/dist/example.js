@@ -47634,6 +47634,9 @@
         array: function (tar) {
             return type(tar) === 'array';
         },
+        num: function (tar) {
+            return type(tar) === 'number';
+        },
         str: function (tar) {
             return type(tar) === 'string';
         },
@@ -47749,6 +47752,7 @@
             this.radius = 0;
             this.overflow = 'scroll';
             this.target = 'x';
+            this.antiTarget = 'y';
             this.maxScrollDis = 0;
             this.touching = false;
             this.bouncing = 0;
@@ -47762,6 +47766,12 @@
                 minDeltaToStop: 0.3,
                 // 惯性滚动的速度衰减
                 speedDecay: function (speed) { return speed - speed * 0.02; },
+                // 反向阻碍系数
+                // 当反向增量 > 正向增量时，则阻止滚动
+                //      false: 不阻止
+                //      true: 反向增量 > 正向增量，则阻止滚动
+                //      number:  反向增量 + n > 正向增量，则阻止滚动
+                antiFactor: false,
                 // 弹性拉动衰减
                 bounceResist: function (delta) {
                     var rate;
@@ -47788,9 +47798,11 @@
             });
             if (isVer(this.direction)) {
                 this.target = 'y';
+                this.antiTarget = 'x';
             }
             else {
                 this.target = 'x';
+                this.antiTarget = 'y';
             }
             this.config = extend(this.config, this.options.config);
             this.init();
@@ -47823,8 +47835,7 @@
                 mask.drawRect(0, 0, this.width, this.height);
             }
             mask.endFill();
-            this.container.addChild(this.mask = mask);
-            this.container.mask = mask;
+            this.container.addChild(this.container.mask = this.mask = mask);
         };
         PixiBetterScroller.prototype._bindOriginEvent = function () {
             var _this = this;
@@ -47847,8 +47858,17 @@
             if (!this.startPoint)
                 this.startPoint = curPoint;
             var delta = curPoint[this.target] - this.startPoint[this.target];
+            var antiDelta = curPoint[this.antiTarget] - this.startPoint[this.antiTarget];
             if (!delta)
                 return;
+            // 反向阻碍
+            var antiFactor = this.config.antiFactor;
+            if (antiFactor !== false) {
+                var anti = is.num(antiFactor) ? antiFactor : 0;
+                if (Math.abs(antiDelta) + anti >= Math.abs(delta)) {
+                    return;
+                }
+            }
             // 拖动跟随
             this.scrolling = true;
             this._scroll(delta, function (toBounce) {
@@ -48043,7 +48063,6 @@
         };
         return PixiBetterScroller;
     }());
-    //# sourceMappingURL=index.js.map
 
     window.PIXI = PIXI;
     function getView() {
