@@ -47872,7 +47872,7 @@
                 if (toBounce) {
                     _this.bouncing = toBounce;
                     delta = _this.config.bounceResist(delta);
-                    _this._setPos(delta);
+                    _this._addPos(delta);
                 }
             });
             this.startPoint = curPoint;
@@ -47907,7 +47907,7 @@
                         _this.scrolling = false;
                     }
                     else {
-                        _this.content[_this.target] = pos;
+                        _this._setPos(pos);
                     }
                 });
             };
@@ -47930,7 +47930,7 @@
                     return false;
                 start = start + (end - start) / _this.config.scrollCurve;
                 if (Math.abs(start - end) < _this.config.minDeltaToStop) {
-                    _this.content[_this.target] = end;
+                    _this._setPos(end);
                     callback && callback(end, true);
                     return false;
                 }
@@ -47943,7 +47943,7 @@
             if (this.overflow === 'scroll') {
                 var next = this.content[this.target] + delta;
                 if (next <= 0 && next >= -this.maxScrollDis) {
-                    this._setPos(delta);
+                    this._addPos(delta);
                     callback(false);
                     if (this.options.onScroll) {
                         this.options.onScroll(this.content[this.target]);
@@ -47980,7 +47980,7 @@
                             loop(function () {
                                 if (_this.touching)
                                     return false;
-                                _this._setPos(dpos);
+                                _this._addPos(dpos);
                                 dpos = _this.config.bounceResist(dpos);
                                 if (Math.abs(dpos) < _this.config.minDeltaToStop) {
                                     _this._bounceBack();
@@ -48002,8 +48002,15 @@
                 }
             }, false);
         };
-        PixiBetterScroller.prototype._setPos = function (delta) {
+        PixiBetterScroller.prototype._addPos = function (delta) {
+            if (!is.num(delta))
+                return;
             this.content[this.target] += Math.round(delta);
+        };
+        PixiBetterScroller.prototype._setPos = function (pos) {
+            if (!is.num(pos))
+                return;
+            this.content[this.target] = Math.round(pos);
         };
         PixiBetterScroller.prototype.addChild = function (elm, scrollable) {
             if (scrollable === void 0) { scrollable = true; }
@@ -48046,7 +48053,7 @@
                 this._scrollTo(-end, function (pos, isStoped) {
                     var delta = pos - _this.content[_this.target];
                     _this._scroll(delta, function (toBounce) {
-                        _this.content[_this.target] = pos;
+                        _this._setPos(pos);
                         if (isStoped && toBounce) {
                             _this.bouncing = toBounce;
                             _this._bounceBack();
@@ -48055,7 +48062,7 @@
                 });
             }
             else {
-                this.content[this.target] = -end;
+                this._setPos(-end);
             }
         };
         return PixiBetterScroller;
@@ -48146,7 +48153,7 @@
                     text.y = (loaded.height - text.height) / 2;
                     loaded.addChild(text);
                     scroller.addChild(loaded);
-                }, 1000);
+                }, 0);
             }
         },
     }, ver);

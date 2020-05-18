@@ -92,7 +92,7 @@ const scroller = new PixiBetterScroller({
                 text.y = (loaded.height - text.height) / 2
                 loaded.addChild(text)
                 scroller.addChild(loaded)
-            }, 1000)
+            }, 0)
         }
     },
 }, ver)

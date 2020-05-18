@@ -175,7 +175,7 @@ export default class PixiBetterScroller {
             if (toBounce) {
                 this.bouncing = toBounce
                 delta = this.config.bounceResist(delta)
-                this._setPos(delta)
+                this._addPos(delta)
             }
         })
         this.startPoint = curPoint
@@ -210,7 +210,7 @@ export default class PixiBetterScroller {
                     }
                     this.scrolling = false
                 } else {
-                    this.content[this.target] = pos
+                    this._setPos(pos)
                 }
             })
         }
@@ -229,7 +229,7 @@ export default class PixiBetterScroller {
             if (this.touching) return false
             start = start + (end - start) / this.config.scrollCurve
             if (Math.abs(start - end) < this.config.minDeltaToStop) {
-                this.content[this.target] = end
+                this._setPos(end)
                 callback && callback(end, true)
                 return false
             }
@@ -241,7 +241,7 @@ export default class PixiBetterScroller {
         if (this.overflow === 'scroll') {
             const next = this.content[this.target] + delta
             if (next <= 0 && next >= -this.maxScrollDis) {
-                this._setPos(delta)
+                this._addPos(delta)
                 callback(false)
 
                 if (this.options.onScroll) {
@@ -278,7 +278,7 @@ export default class PixiBetterScroller {
                         loop(() => {
                             if (this.touching) return false
     
-                            this._setPos(dpos)
+                            this._addPos(dpos)
                             dpos = this.config.bounceResist(dpos)
                             if (Math.abs(dpos) < this.config.minDeltaToStop) {
                                 this._bounceBack()
@@ -297,8 +297,13 @@ export default class PixiBetterScroller {
             }
         }, false)
     }
-    private _setPos(delta) {
+    private _addPos(delta) {
+        if (!is.num(delta)) return
         this.content[this.target] += Math.round(delta)
+    }
+    private _setPos(pos) {
+        if (!is.num(pos)) return
+        this.content[this.target] = Math.round(pos)
     }
     public addChild(elm, scrollable: boolean = true) {
         if (scrollable) {
@@ -336,7 +341,7 @@ export default class PixiBetterScroller {
             this._scrollTo(-end, (pos, isStoped) => {
                 const delta = pos - this.content[this.target]
                 this._scroll(delta, (toBounce) => {
-                    this.content[this.target] = pos
+                    this._setPos(pos)
                     if (isStoped && toBounce) {
                         this.bouncing = toBounce
                         this._bounceBack()
@@ -344,7 +349,7 @@ export default class PixiBetterScroller {
                 })
             })
         } else {
-            this.content[this.target] = -end
+            this._setPos(-end)
         }
     }
 }
