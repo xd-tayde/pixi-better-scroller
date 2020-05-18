@@ -71,7 +71,7 @@ declare module 'pixi-better-scroller' {
         overflow: 'scroll' | 'hidden'
         constructor(options: PScroller.IOps, parent: any)
         addChild(elm: any, scrollable?: boolean)
-        removeChild(elm: any)
+        removeChild(elm?: any)
         destroy()
         scrollTo(end: number, hasAnima?: boolean)
     }

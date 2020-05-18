@@ -18,9 +18,6 @@ const ORIGIN_EVENT_MAP = [{
 }, {
     name: 'pointercancel',
     fn: '_end',
-}, {
-    name: 'pointerout',
-    fn: '_end',
 }]
 
 function isVer(direction: PScroller.IOps['direction']) {

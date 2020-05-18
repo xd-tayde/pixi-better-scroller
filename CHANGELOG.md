@@ -1,5 +1,8 @@
 # ChangeLog
 
+- [0.1.2]
+    - 修复：pointout 导致 _end 事件被多次触发的问题；
+
 - [0.1.1]
     - 新增: config.antiFactor 反向阻碍系数
 

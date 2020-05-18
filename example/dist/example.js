@@ -47731,9 +47731,6 @@
         }, {
             name: 'pointercancel',
             fn: '_end',
-        }, {
-            name: 'pointerout',
-            fn: '_end',
         }];
     function isVer(direction) {
         if (!direction)
@@ -48063,6 +48060,7 @@
         };
         return PixiBetterScroller;
     }());
+    //# sourceMappingURL=index.js.map
 
     window.PIXI = PIXI;
     function getView() {
