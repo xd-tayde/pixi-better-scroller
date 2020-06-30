@@ -148,11 +148,11 @@ export default class PixiBetterScroller {
     public _start(ev: PScroller.PixiEvent) {
         this.startTime = Date.now()
         this.touching = true
-        this.touchStartPoint = this.startPoint = getPoint(ev, 0)
+        this.touchStartPoint = this.startPoint = getPoint(ev)
     }
     public _move(ev: PScroller.PixiEvent) {
         if (!this.touching) return
-        const curPoint = getPoint(ev, 0)
+        const curPoint = getPoint(ev)
 
         if (!this.startPoint) this.startPoint = curPoint
         let delta = curPoint[this.target] - this.startPoint[this.target]
@@ -182,7 +182,7 @@ export default class PixiBetterScroller {
     }
     public _end(ev) {
         this.touching = false
-        const endPoint = getPoint(ev, 0)
+        const endPoint = getPoint(ev)
         const endTime = Date.now()
         const deltaT = endTime - this.startTime
 
@@ -257,10 +257,9 @@ export default class PixiBetterScroller {
     private _endScroll(endPoint, deltaT) {
         if (!this.touchStartPoint) return
         const deltaPos = endPoint[this.target] - this.touchStartPoint[this.target]
-        
+
         if (!deltaPos) return
         let speed = deltaPos / deltaT
-
         let dpos
         loop((next) => {
             // 点击停止惯性滚动

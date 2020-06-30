@@ -47682,16 +47682,16 @@
     };
     //# sourceMappingURL=is.js.map
 
-    function getPoint(ev, index) {
-        if (ev.data.pointerType === 'touch') {
-            var touches = ev.data.originalEvent.touches;
-            if (touches.length) {
-                return {
-                    x: Math.round(touches[index].pageX),
-                    y: Math.round(touches[index].pageY),
-                };
-            }
-        }
+    function getPoint(ev) {
+        // if (ev.data.pointerType === 'touch') {
+        //     const touches = ev.data.originalEvent.touches
+        //     if (touches.length) {
+        //         return {
+        //             x: Math.round(touches[index].pageX),
+        //             y: Math.round(touches[index].pageY),
+        //         }
+        //     }
+        // }
         return {
             x: Math.round(ev.data.global.x),
             y: Math.round(ev.data.global.y),
@@ -47845,13 +47845,13 @@
         PixiBetterScroller.prototype._start = function (ev) {
             this.startTime = Date.now();
             this.touching = true;
-            this.touchStartPoint = this.startPoint = getPoint(ev, 0);
+            this.touchStartPoint = this.startPoint = getPoint(ev);
         };
         PixiBetterScroller.prototype._move = function (ev) {
             var _this = this;
             if (!this.touching)
                 return;
-            var curPoint = getPoint(ev, 0);
+            var curPoint = getPoint(ev);
             if (!this.startPoint)
                 this.startPoint = curPoint;
             var delta = curPoint[this.target] - this.startPoint[this.target];
@@ -47879,7 +47879,7 @@
         };
         PixiBetterScroller.prototype._end = function (ev) {
             this.touching = false;
-            var endPoint = getPoint(ev, 0);
+            var endPoint = getPoint(ev);
             var endTime = Date.now();
             var deltaT = endTime - this.startTime;
             if (this.bouncing &&

@@ -17,16 +17,16 @@ export const getValue = (root: any, get: string) => {
     return value
 }
 
-export function getPoint(ev: PScroller.PixiEvent, index: 0 | 1) {
-    if (ev.data.pointerType === 'touch') {
-        const touches = ev.data.originalEvent.touches
-        if (touches.length) {
-            return {
-                x: Math.round(touches[index].pageX),
-                y: Math.round(touches[index].pageY),
-            }
-        }
-    }
+export function getPoint(ev: PScroller.PixiEvent) {
+    // if (ev.data.pointerType === 'touch') {
+    //     const touches = ev.data.originalEvent.touches
+    //     if (touches.length) {
+    //         return {
+    //             x: Math.round(touches[index].pageX),
+    //             y: Math.round(touches[index].pageY),
+    //         }
+    //     }
+    // }
     return {
         x: Math.round(ev.data.global.x),
         y: Math.round(ev.data.global.y),
