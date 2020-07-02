@@ -1,6 +1,6 @@
 {
 	"name": "pixi-better-scroller",
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"description": "a nice, simple scroller container which has the inertia scrolling, bounce scrolling and drag scrolling, as the ios system's scroller.",
 	"keywords": [
 		"scroll",

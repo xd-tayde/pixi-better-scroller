@@ -14,7 +14,7 @@ function getView() {
     } else {
         view = document.createElement('canvas')
         document.body.appendChild(view)
-        view.setAttribute('style', `width: 812px; height: 375px; transform-origin: left top;`)
+        view.setAttribute('style', `width: 100%; height: 100%;`)
         return view
     }
 }
