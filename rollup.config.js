@@ -11,6 +11,7 @@ import globals from 'rollup-plugin-node-globals'
 import image from 'rollup-plugin-img'
 import json from 'rollup-plugin-json'
 import builtins from 'rollup-plugin-node-builtins'
+const getHost = require('get-host')
 
 // 包配置
 const packages = require('./package.json')
@@ -100,6 +101,7 @@ const Config = {
         }),
         // 开发时开启服务
         (isExample && serve({
+            host: getHost(),
             contentBase: './example',
             port: 3000,
             open: true,

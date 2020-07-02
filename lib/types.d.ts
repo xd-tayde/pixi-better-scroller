@@ -21,8 +21,10 @@ declare namespace PScroller {
         [props: string]: any,
     }
     interface Point {
+        id: number
         x: number
         y: number
+        t: number
     }
 
     interface IConfig {
@@ -37,6 +39,8 @@ declare namespace PScroller {
         bounceResist?: (delta) => number,
         // 反向
         antiFactor?: boolean | number,
+        // canvas缩放会导致事件原生坐标错误， 需要乘以相应缩放
+        canvasScale: number,
     }
     
     interface IOps {

@@ -49,14 +49,15 @@ export default class PixiBetterScroller {
     public mask: Graphics
 
     private touching: boolean = false
-    private touchStartPoint: PScroller.Point | null
-    private startPoint: PScroller.Point | null
-    private startTime: number
+    private touchStartPoints: PScroller.Point[] = []
+    private curPoints: PScroller.Point[] = []
     private bouncing: -1 | 1 | 0 = 0
 
     public scrolling: boolean = false
 
     public config = {
+        // canvas缩放会导致事件原生坐标错误， 需要乘以相应缩放
+        canvasScale: 1,
         // 触发惯性滚动的 触摸时间上限
         timeForEndScroll: 300,
         // 定点滚动曲线
@@ -146,18 +147,22 @@ export default class PixiBetterScroller {
         })
     }
     public _start(ev: PScroller.PixiEvent) {
-        this.startTime = Date.now()
+        const startPoint = getPoint(ev)
+        this.touchStartPoints.push(startPoint)
+        this.curPoints.push(startPoint)
+
         this.touching = true
-        this.touchStartPoint = this.startPoint = getPoint(ev)
-    }
+    } 
     public _move(ev: PScroller.PixiEvent) {
         if (!this.touching) return
+
         const curPoint = getPoint(ev)
+        const lastPoint = this._findLastPoint(curPoint.id)
+        if (!lastPoint) return
 
-        if (!this.startPoint) this.startPoint = curPoint
-        let delta = curPoint[this.target] - this.startPoint[this.target]
-        const antiDelta = curPoint[this.antiTarget] - this.startPoint[this.antiTarget]
-
+        let delta = curPoint[this.target] - lastPoint[this.target]
+        const antiDelta = curPoint[this.antiTarget] - lastPoint[this.antiTarget]
+        // 当偏移为0时，则跳过
         if (!delta) return
 
         // 反向阻碍
@@ -178,13 +183,17 @@ export default class PixiBetterScroller {
                 this._addPos(delta)
             }
         })
-        this.startPoint = curPoint
+
+        this._replaceCurPoint(curPoint)
     }
     public _end(ev) {
+        console.log('end')
         this.touching = false
         const endPoint = getPoint(ev)
-        const endTime = Date.now()
-        const deltaT = endTime - this.startTime
+        const startPoint = this._findStartPoint(endPoint.id)
+        if (!startPoint) return
+
+        const deltaT = endPoint.t - startPoint.t
 
         if (
             this.bouncing &&
@@ -199,7 +208,32 @@ export default class PixiBetterScroller {
             // 否则触发惯性滚动
             this._endScroll(endPoint, deltaT)
         }
+
+        this.touchStartPoints = []
+        this.curPoints = []
     }
+    private _findStartPoint(id: number) {
+        for (let i = 0; i < this.touchStartPoints.length; i++) {
+            const point = this.touchStartPoints[i]
+            if (point.id === id) return point
+        }
+        return undefined
+    }
+    private _findLastPoint(id: number) {
+        for (let i = 0; i < this.curPoints.length; i++) {
+            const point = this.curPoints[i]
+            if (point.id === id) return point
+        }
+        return undefined
+    }
+    private _replaceCurPoint(curPoint: PScroller.Point) {
+        const startPoint = this._findLastPoint(curPoint.id)
+        if (startPoint) {
+            const index = this.curPoints.indexOf(startPoint)
+            this.curPoints.splice(index, 1, curPoint)
+        }
+    }
+
     private _bounceBack() {
         const _back = (pos?) => {
             const end = this.bouncing < 0 ? 0 : -this.maxScrollDis
@@ -255,8 +289,10 @@ export default class PixiBetterScroller {
         }
     }
     private _endScroll(endPoint, deltaT) {
-        if (!this.touchStartPoint) return
-        const deltaPos = endPoint[this.target] - this.touchStartPoint[this.target]
+        const startPoint = this._findStartPoint(endPoint.id)
+        if (!startPoint) return
+
+        const deltaPos = endPoint[this.target] - startPoint[this.target]
 
         if (!deltaPos) return
         let speed = deltaPos / deltaT

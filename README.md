@@ -103,8 +103,6 @@ interface IConfig {
     // the resistion of bounce
     bounceResist?: (delta) => number,
 
-
-    
 }
 ```
 

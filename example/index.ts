@@ -7,13 +7,14 @@ import PixiBetterScroller from '../lib'
 
 window.PIXI = PIXI
 
+let view 
 function getView() {
     if (typeof canvas !== 'undefined') {
         return canvas
     } else {
-        const view = document.createElement('canvas')
+        view = document.createElement('canvas')
         document.body.appendChild(view)
-        view.setAttribute('style', `width: 100%; height: 100%;`)
+        view.setAttribute('style', `width: 812px; height: 375px; transform-origin: left top;`)
         return view
     }
 }
@@ -31,12 +32,11 @@ const game = new Application({
     resolution: 2,
     forceCanvas: false,
     clearBeforeRender: true,
-    forceFXAA: false,
     width: iw,
     height: ih,
     view: getView(),
 })
-game.renderer.resize(iw, ih)
+// game.renderer.resize(iw, ih)
 
 const ver = createRect({
     width: 180,
@@ -250,7 +250,7 @@ export function string2hex(string: any) {
         if (!str) {
             return str
         } else {
-            return utils.string2hex(str)
+            return (utils.string2hex as any)(str)
         }
     } else {
         return string

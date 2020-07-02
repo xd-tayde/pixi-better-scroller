@@ -18,16 +18,9 @@ export const getValue = (root: any, get: string) => {
 }
 
 export function getPoint(ev: PScroller.PixiEvent) {
-    // if (ev.data.pointerType === 'touch') {
-    //     const touches = ev.data.originalEvent.touches
-    //     if (touches.length) {
-    //         return {
-    //             x: Math.round(touches[index].pageX),
-    //             y: Math.round(touches[index].pageY),
-    //         }
-    //     }
-    // }
     return {
+        t: Date.now(),
+        id: ev.data.identifier,
         x: Math.round(ev.data.global.x),
         y: Math.round(ev.data.global.y),
     }
