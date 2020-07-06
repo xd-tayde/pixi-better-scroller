@@ -55,8 +55,6 @@ export default class PixiBetterScroller {
     public scrolling: boolean = false
 
     public config = {
-        // canvas缩放会导致事件原生坐标错误， 需要乘以相应缩放
-        canvasScale: 1,
         // 触发惯性滚动的 触摸时间上限
         timeForEndScroll: 300,
         // 定点滚动曲线
