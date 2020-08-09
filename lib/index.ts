@@ -364,8 +364,8 @@ export default class PixiBetterScroller {
             this.content.removeChildren()
         }
     }
-    public destroy() {
-        this.parent.removeChild(this.container)
+    public destroy(options?: PScroller.destroyOps) {
+        this.container.destroy(options)
     }
     public scrollTo(end, hasAnima: boolean = true) {
         if (hasAnima) {

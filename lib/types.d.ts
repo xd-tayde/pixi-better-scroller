@@ -53,6 +53,12 @@ declare namespace PScroller {
         onScroll?: (pos: number) => void
         onBounce?: (direction: -1 | 1 | 0, next: (pos?: number) => void, pos: number) => void
     }
+
+    interface destroyOps {
+        children?: boolean | undefined;
+        texture?: boolean | undefined;
+        baseTexture?: boolean | undefined;
+    }
 }
 
 declare module 'pixi-better-scroller' {
@@ -74,7 +80,7 @@ declare module 'pixi-better-scroller' {
         constructor(options: PScroller.IOps, parent: any)
         addChild(elm: any, scrollable?: boolean)
         removeChild(elm?: any)
-        destroy()
+        destroy(options?: PScroller.destroyOps)
         scrollTo(end: number, hasAnima?: boolean)
     }
 }
