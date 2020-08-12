@@ -143,6 +143,12 @@ export default class PixiBetterScroller {
             this.container.on(name, this[fn], this)
         })
     }
+    private _unbindOriginEvent() {
+        this.container.interactive = false
+        ORIGIN_EVENT_MAP.map(({ name, fn }) => {
+            this.container.off(name, this[fn], this)
+        })
+    }
     public _start(ev: PScroller.PixiEvent) {
         const startPoint = getPoint(ev)
         this.touchStartPoints.push(startPoint)
@@ -365,6 +371,7 @@ export default class PixiBetterScroller {
         }
     }
     public destroy(options?: PScroller.destroyOps) {
+        this._unbindOriginEvent()
         this.container.destroy(options)
     }
     public scrollTo(end, hasAnima: boolean = true) {

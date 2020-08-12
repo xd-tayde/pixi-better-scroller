@@ -44428,8 +44428,6 @@
             this.bouncing = 0;
             this.scrolling = false;
             this.config = {
-                // canvas缩放会导致事件原生坐标错误， 需要乘以相应缩放
-                canvasScale: 1,
                 // 触发惯性滚动的 触摸时间上限
                 timeForEndScroll: 300,
                 // 定点滚动曲线
@@ -44515,6 +44513,14 @@
             ORIGIN_EVENT_MAP.map(function (_a) {
                 var name = _a.name, fn = _a.fn;
                 _this.container.on(name, _this[fn], _this);
+            });
+        };
+        PixiBetterScroller.prototype._unbindOriginEvent = function () {
+            var _this = this;
+            this.container.interactive = false;
+            ORIGIN_EVENT_MAP.map(function (_a) {
+                var name = _a.name, fn = _a.fn;
+                _this.container.off(name, _this[fn], _this);
             });
         };
         PixiBetterScroller.prototype._start = function (ev) {
@@ -44749,8 +44755,9 @@
                 this.content.removeChildren();
             }
         };
-        PixiBetterScroller.prototype.destroy = function () {
-            this.parent.removeChild(this.container);
+        PixiBetterScroller.prototype.destroy = function (options) {
+            this._unbindOriginEvent();
+            this.container.destroy(options);
         };
         PixiBetterScroller.prototype.scrollTo = function (end, hasAnima) {
             var _this = this;
@@ -44912,6 +44919,9 @@
     });
     scroller.addChild(load, false);
     scroller.addChild(verRect);
+    setTimeout(function () {
+        scroller.destroy();
+    }, 5000);
     // -----------
     // 水平
     var horRect = createRect({
