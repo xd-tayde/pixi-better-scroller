@@ -143,5 +143,9 @@ the pixi container of scroller.
 
 the pixi container of scroll content.
 
+### `- scroller.x / y / width / height`
+
+you can use scroller.x / y / width / height directly to update scroller status.
+
 
 

@@ -1,5 +1,8 @@
 # ChangeLog
 
+- [0.1.86]
+    - 新增可直接通过 scroller 动态设置 x、y、width、height；
+
 - [0.1.84]
     - 透传 destroy 方法参数， 修复 destroy 未解绑事件的问题；
 

@@ -28,10 +28,46 @@ export default class PixiBetterScroller {
     public options: PScroller.IOps
 
     public direction: PScroller.IOps['direction'] = 'vertical'
-    public width: number = 500
-    public height: number = 500
-    public x: number = 0
-    public y: number = 0
+    public get width() {
+        return is.num(this.options.width) ? this.options.width : 500
+    }
+    public set width(val: number) {
+        if (this.options.width === val) return
+        this.options.width = val
+        this._createMask()
+        this.setScrollDisAndOverflow()
+    }
+
+    public get height() {
+        return is.num(this.options.height) ? this.options.height : 500
+    }
+    public set height(val: number) {
+        if (this.options.height === val) return
+        this.options.height = val
+        this._createMask()
+        this.setScrollDisAndOverflow()
+    }
+
+    public get x() {
+        return is.num(this.options.x) ? this.options.x : 0
+    }
+    public set x(val: number) {
+        this.options.x = val
+        if (this.container) {
+            this.container.x = val
+        }
+    }
+
+    public get y() {
+        return is.num(this.options.y) ? this.options.y : 0
+    }
+    public set y(val: number) {
+        this.options.y = val
+        if (this.container) {
+            this.container.y = val
+        }
+    }
+
     public radius: number = 0
     public overflow: 'scroll' | 'hidden' = 'scroll'
 
@@ -45,7 +81,7 @@ export default class PixiBetterScroller {
     public container: Container
     public content: Container
     public static: Container
-    public mask: Graphics
+    public mask: Graphics | undefined
 
     private touching: boolean = false
     private touchStartPoints: PScroller.Point[] = []
@@ -89,7 +125,7 @@ export default class PixiBetterScroller {
         this.options = options
         this.parent = parent;
 
-        ['x', 'y', 'width', 'height', 'direction', 'overflow', 'radius'].map((attr) => {
+        ['direction', 'overflow', 'radius'].map((attr) => {
             if (!is.undef(options[attr])) this[attr] = options[attr]
         })
 
@@ -127,6 +163,13 @@ export default class PixiBetterScroller {
         this._bindOriginEvent()
     }
     private _createMask() {
+        if (this.mask) {
+            this.container.removeChild(this.mask)
+            this.mask.destroy()
+            this.mask = undefined
+            this.container.mask = null
+        }
+
         const mask = new Graphics()
         mask.beginFill(0xFFFFFF, 1)
         if (this.radius) {
@@ -345,20 +388,23 @@ export default class PixiBetterScroller {
     public addChild(elm, scrollable: boolean = true) {
         if (scrollable) {
             this.content.addChild(elm)   
-            const attr = isVer(this.direction) ? 'height' : 'width'
-            const parentLen = this[attr]
-            const childLen = this.content[attr]
-    
-            if (childLen > parentLen) {
-                this.maxScrollDis = childLen - parentLen
-                if (this.options.overflow !== 'hidden') {
-                    this.overflow = 'scroll'
-                }
-            } else if (this.options.overflow !== 'scroll') {
-                this.overflow = 'hidden'
-            }
+            this.setScrollDisAndOverflow()
         } else {
             this.static.addChild(elm)
+        }
+    }
+    private setScrollDisAndOverflow() {
+        const attr = isVer(this.direction) ? 'height' : 'width'
+        const parentLen = this[attr]
+        const childLen = this.content[attr]
+
+        if (childLen > parentLen) {
+            this.maxScrollDis = childLen - parentLen
+            if (this.options.overflow !== 'hidden') {
+                this.overflow = 'scroll'
+            }
+        } else if (this.options.overflow !== 'scroll') {
+            this.overflow = 'hidden'
         }
     }
     public removeChild(elm) {

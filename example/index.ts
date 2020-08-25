@@ -210,6 +210,12 @@ for (let i = 0; i < 14; i++) {
     horRect.addChild(item)
 }
 
+// setTimeout(() => {
+//     scroller1.x = 500
+//     scroller1.y = 300
+//     scroller1.width = 400
+// }, 2000)
+
 export function createRect(ops) {
     const { 
         width = 0, 

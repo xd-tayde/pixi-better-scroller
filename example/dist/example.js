@@ -44413,10 +44413,6 @@
             var _this = this;
             if (options === void 0) { options = {}; }
             this.direction = 'vertical';
-            this.width = 500;
-            this.height = 500;
-            this.x = 0;
-            this.y = 0;
             this.radius = 0;
             this.overflow = 'scroll';
             this.target = 'x';
@@ -44462,7 +44458,7 @@
             };
             this.options = options;
             this.parent = parent;
-            ['x', 'y', 'width', 'height', 'direction', 'overflow', 'radius'].map(function (attr) {
+            ['direction', 'overflow', 'radius'].map(function (attr) {
                 if (!is.undef(options[attr]))
                     _this[attr] = options[attr];
             });
@@ -44477,6 +44473,60 @@
             this.config = extend(this.config, this.options.config);
             this.init();
         }
+        Object.defineProperty(PixiBetterScroller.prototype, "width", {
+            get: function () {
+                return is.num(this.options.width) ? this.options.width : 500;
+            },
+            set: function (val) {
+                if (this.options.width === val)
+                    return;
+                this.options.width = val;
+                this._createMask();
+                this.setScrollDisAndOverflow();
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PixiBetterScroller.prototype, "height", {
+            get: function () {
+                return is.num(this.options.height) ? this.options.height : 500;
+            },
+            set: function (val) {
+                if (this.options.height === val)
+                    return;
+                this.options.height = val;
+                this._createMask();
+                this.setScrollDisAndOverflow();
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PixiBetterScroller.prototype, "x", {
+            get: function () {
+                return is.num(this.options.x) ? this.options.x : 0;
+            },
+            set: function (val) {
+                this.options.x = val;
+                if (this.container) {
+                    this.container.x = val;
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PixiBetterScroller.prototype, "y", {
+            get: function () {
+                return is.num(this.options.y) ? this.options.y : 0;
+            },
+            set: function (val) {
+                this.options.y = val;
+                if (this.container) {
+                    this.container.y = val;
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
         PixiBetterScroller.prototype.init = function () {
             this.container = new Container();
             this.container.x = this.x;
@@ -44496,6 +44546,12 @@
             this._bindOriginEvent();
         };
         PixiBetterScroller.prototype._createMask = function () {
+            if (this.mask) {
+                this.container.removeChild(this.mask);
+                this.mask.destroy();
+                this.mask = undefined;
+                this.container.mask = null;
+            }
             var mask = new Graphics();
             mask.beginFill(0xFFFFFF, 1);
             if (this.radius) {
@@ -44728,21 +44784,24 @@
             if (scrollable === void 0) { scrollable = true; }
             if (scrollable) {
                 this.content.addChild(elm);
-                var attr = isVer(this.direction) ? 'height' : 'width';
-                var parentLen = this[attr];
-                var childLen = this.content[attr];
-                if (childLen > parentLen) {
-                    this.maxScrollDis = childLen - parentLen;
-                    if (this.options.overflow !== 'hidden') {
-                        this.overflow = 'scroll';
-                    }
-                }
-                else if (this.options.overflow !== 'scroll') {
-                    this.overflow = 'hidden';
-                }
+                this.setScrollDisAndOverflow();
             }
             else {
                 this.static.addChild(elm);
+            }
+        };
+        PixiBetterScroller.prototype.setScrollDisAndOverflow = function () {
+            var attr = isVer(this.direction) ? 'height' : 'width';
+            var parentLen = this[attr];
+            var childLen = this.content[attr];
+            if (childLen > parentLen) {
+                this.maxScrollDis = childLen - parentLen;
+                if (this.options.overflow !== 'hidden') {
+                    this.overflow = 'scroll';
+                }
+            }
+            else if (this.options.overflow !== 'scroll') {
+                this.overflow = 'hidden';
             }
         };
         PixiBetterScroller.prototype.removeChild = function (elm) {
@@ -44919,9 +44978,6 @@
     });
     scroller.addChild(load, false);
     scroller.addChild(verRect);
-    setTimeout(function () {
-        scroller.destroy();
-    }, 5000);
     // -----------
     // 水平
     var horRect = createRect({
@@ -44980,6 +45036,11 @@
     for (var i = 0; i < 14; i++) {
         _loop_2(i);
     }
+    // setTimeout(() => {
+    //     scroller1.x = 500
+    //     scroller1.y = 300
+    //     scroller1.width = 400
+    // }, 2000)
     function createRect(ops) {
         var _a = ops.width, width = _a === void 0 ? 0 : _a, _b = ops.height, height = _b === void 0 ? 0 : _b, backgroundColor = ops.backgroundColor, _c = ops.backgroundAlpha, backgroundAlpha = _c === void 0 ? 1 : _c, _d = ops.borderWidth, borderWidth = _d === void 0 ? 0 : _d, _e = ops.borderColor, borderColor = _e === void 0 ? 0x000000 : _e, _f = ops.borderRadius, props = __rest(ops, ["width", "height", "backgroundColor", "backgroundAlpha", "borderWidth", "borderColor", "borderRadius"]);
         var rect = new Graphics();
