@@ -108,16 +108,26 @@ export default class PixiBetterScroller {
         // 弹性拉动衰减
         bounceResist: (delta) => {
             let rate
+            const attr = isVer(this.direction) ? 'height' : 'width'
+            const parentLen = this[attr]
+            const childLen = this.content[attr]
             if (this.bouncing < 0) {
-                rate = 0.8 - this.content[this.target] * 0.005
+                if (parentLen >= childLen) {
+                    rate = 0.8 - childLen * 0.0058
+                } else {
+                    rate = 0.8 - this.content[this.target] * 0.0058
+                }
             } else if (this.bouncing > 0) {
-                const attr = isVer(this.direction) ? 'height' : 'width'
-                const parentLen = this[attr]
-                const childLen = this.content[attr]
-                rate = 0.8 - (parentLen - this.content[this.target] - childLen) * 0.005
+                if (parentLen >= childLen) {
+                    rate =  0.8 - childLen * 0.0058
+                } else {
+                    rate = 0.8 - (parentLen - this.content[this.target] - childLen) * 0.0058
+                }
             } else {
                 rate = 1
             }
+
+            if (rate < 0) rate = -rate
             return delta * rate
         },
     }

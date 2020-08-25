@@ -44441,18 +44441,30 @@
                 // 弹性拉动衰减
                 bounceResist: function (delta) {
                     var rate;
+                    var attr = isVer(_this.direction) ? 'height' : 'width';
+                    var parentLen = _this[attr];
+                    var childLen = _this.content[attr];
                     if (_this.bouncing < 0) {
-                        rate = 0.8 - _this.content[_this.target] * 0.005;
+                        if (parentLen >= childLen) {
+                            rate = 0.8 - childLen * 0.0058;
+                        }
+                        else {
+                            rate = 0.8 - _this.content[_this.target] * 0.0058;
+                        }
                     }
                     else if (_this.bouncing > 0) {
-                        var attr = isVer(_this.direction) ? 'height' : 'width';
-                        var parentLen = _this[attr];
-                        var childLen = _this.content[attr];
-                        rate = 0.8 - (parentLen - _this.content[_this.target] - childLen) * 0.005;
+                        if (parentLen >= childLen) {
+                            rate = 0.8 - childLen * 0.0058;
+                        }
+                        else {
+                            rate = 0.8 - (parentLen - _this.content[_this.target] - childLen) * 0.0058;
+                        }
                     }
                     else {
                         rate = 1;
                     }
+                    if (rate < 0)
+                        rate = -rate;
                     return delta * rate;
                 },
             };
@@ -45083,7 +45095,6 @@
         extend(text, props);
         return text;
     }
-    //# sourceMappingURL=index.js.map
 
     exports.createRect = createRect;
     exports.createText = createText;
