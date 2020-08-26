@@ -1,6 +1,6 @@
 # ChangeLog
 
-- [0.1.87]
+- [0.1.88]
     - 新增可直接通过 scroller 动态设置 x、y、width、height；
     - 修复当子级内容小于滚动容器时，弹性回弹可能会出现抖动的问题，优化 bounceResist 弹性衰减函数；
 

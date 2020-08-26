@@ -1,4 +1,4 @@
-import { Container, Graphics } from 'pixi.js'
+import { Container, Graphics, MaskData, Rectangle } from 'pixi.js'
 import { is, getPoint, loop, extend } from './utils'
 
 // 挟持的原生事件
@@ -180,15 +180,25 @@ export default class PixiBetterScroller {
             this.container.mask = null
         }
 
-        const mask = new Graphics()
-        mask.beginFill(0xFFFFFF, 1)
+        const rect = new Graphics()
+        rect.beginFill(0xFFFFFF, 1)
         if (this.radius) {
-            mask.drawRoundedRect(0, 0, this.width, this.height, this.radius)
+            rect.drawRoundedRect(0, 0, this.width, this.height, this.radius)
         } else {
-            mask.drawRect(0, 0, this.width, this.height)
+            rect.drawRect(0, 0, this.width, this.height)
         }
-        mask.endFill()
-        this.container.addChild(this.container.mask = this.mask = mask)
+        rect.endFill()
+
+        if (this.radius) {
+            this.container.mask = rect
+        } else {
+            const mask = new MaskData(rect)
+            mask.type = 1
+            mask.autoDetect = false
+            this.container.mask = mask
+            this.container.hitArea = new Rectangle(0, 0, this.width, this.height)
+        }
+        this.container.addChild(rect)
     }
     private _bindOriginEvent() {
         this.container.interactive = true

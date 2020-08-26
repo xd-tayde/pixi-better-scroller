@@ -586,7 +586,6 @@
     if (!window.Int32Array) {
         window.Int32Array = Array;
     }
-    //# sourceMappingURL=polyfill.es.js.map
 
     var appleIphone = /iPhone/i;
     var appleIpod = /iPod/i;
@@ -712,9 +711,6 @@
             result.apple.tablet || result.android.tablet || result.windows.tablet;
         return result;
     }
-    //# sourceMappingURL=isMobile.js.map
-
-    //# sourceMappingURL=index.js.map
 
     /*!
      * @pixi/settings - v5.3.0
@@ -993,7 +989,6 @@
          */
         ROUND_PIXELS: false,
     };
-    //# sourceMappingURL=settings.es.js.map
 
     var eventemitter3 = createCommonjsModule(function (module) {
 
@@ -3818,7 +3813,6 @@
         MSAA_QUALITY[MSAA_QUALITY["MEDIUM"] = 4] = "MEDIUM";
         MSAA_QUALITY[MSAA_QUALITY["HIGH"] = 8] = "HIGH";
     })(MSAA_QUALITY || (MSAA_QUALITY = {}));
-    //# sourceMappingURL=constants.es.js.map
 
     /*!
      * @pixi/utils - v5.3.0
@@ -4680,7 +4674,6 @@
         }
         return defaultValue !== undefined ? defaultValue : 1;
     }
-    //# sourceMappingURL=utils.es.js.map
 
     var utils = /*#__PURE__*/Object.freeze({
         BaseTextureCache: BaseTextureCache,
@@ -6630,7 +6623,6 @@
         Transform.IDENTITY = new Transform();
         return Transform;
     }());
-    //# sourceMappingURL=math.es.js.map
 
     /*!
      * @pixi/display - v5.3.0
@@ -8298,7 +8290,6 @@
      * @function containerUpdateTransform
      */
     Container.prototype.containerUpdateTransform = Container.prototype.updateTransform;
-    //# sourceMappingURL=display.es.js.map
 
     /*!
      * @pixi/accessibility - v5.3.0
@@ -8883,7 +8874,6 @@
         };
         return AccessibilityManager;
     }());
-    //# sourceMappingURL=accessibility.es.js.map
 
     /*!
      * @pixi/ticker - v5.3.0
@@ -9727,7 +9717,6 @@
         };
         return TickerPlugin;
     }());
-    //# sourceMappingURL=ticker.es.js.map
 
     /*!
      * @pixi/interaction - v5.3.0
@@ -11924,7 +11913,6 @@
         };
         return InteractionManager;
     }(eventemitter3));
-    //# sourceMappingURL=interaction.es.js.map
 
     /*!
      * @pixi/runner - v5.3.0
@@ -12121,7 +12109,6 @@
          */
         run: { value: Runner.prototype.emit },
     });
-    //# sourceMappingURL=runner.es.js.map
 
     /*!
      * @pixi/core - v5.3.0
@@ -23039,7 +23026,6 @@
     // Setup the default BatchRenderer plugin, this is what
     // we'll actually export at the root level
     var BatchRenderer = BatchPluginFactory.create();
-    //# sourceMappingURL=core.es.js.map
 
     /*!
      * @pixi/app - v5.3.0
@@ -23311,7 +23297,6 @@
     }());
 
     Application.registerPlugin(ResizePlugin);
-    //# sourceMappingURL=app.es.js.map
 
     /*!
      * @pixi/extract - v5.3.0
@@ -23529,7 +23514,6 @@
         };
         return Extract;
     }());
-    //# sourceMappingURL=extract.es.js.map
 
     var parseUri = function parseURI (str, opts) {
       opts = opts || {};
@@ -26058,7 +26042,6 @@
 
       return Loader;
     };
-    //# sourceMappingURL=resource-loader.esm.js.map
 
     /*!
      * @pixi/loaders - v5.3.0
@@ -26376,7 +26359,6 @@
         };
         return AppLoaderPlugin;
     }());
-    //# sourceMappingURL=loaders.es.js.map
 
     /*!
      * @pixi/particles - v5.3.0
@@ -27180,7 +27162,6 @@
         };
         return ParticleRenderer;
     }(ObjectRenderer));
-    //# sourceMappingURL=particles.es.js.map
 
     /*!
      * @pixi/graphics - v5.3.0
@@ -30430,7 +30411,6 @@
         Graphics._TEMP_POINT = new Point();
         return Graphics;
     }(Container));
-    //# sourceMappingURL=graphics.es.js.map
 
     /*!
      * @pixi/sprite - v5.3.0
@@ -31012,7 +30992,6 @@
         });
         return Sprite;
     }(Container));
-    //# sourceMappingURL=sprite.es.js.map
 
     /*!
      * @pixi/text - v5.3.0
@@ -33057,7 +33036,6 @@
         });
         return Text;
     }(Sprite));
-    //# sourceMappingURL=text.es.js.map
 
     /*!
      * @pixi/prepare - v5.3.0
@@ -33684,7 +33662,6 @@
         };
         return TimeLimiter;
     }());
-    //# sourceMappingURL=prepare.es.js.map
 
     /*!
      * @pixi/spritesheet - v5.3.0
@@ -34016,7 +33993,6 @@
         };
         return SpritesheetLoader;
     }());
-    //# sourceMappingURL=spritesheet.es.js.map
 
     /*!
      * @pixi/sprite-tiling - v5.3.0
@@ -34418,7 +34394,6 @@
         };
         return TilingSpriteRenderer;
     }(ObjectRenderer));
-    //# sourceMappingURL=sprite-tiling.es.js.map
 
     /*!
      * @pixi/mesh - v5.3.0
@@ -35127,7 +35102,6 @@
         });
         return MeshGeometry;
     }(Geometry));
-    //# sourceMappingURL=mesh.es.js.map
 
     /*!
      * @pixi/text-bitmap - v5.3.0
@@ -36805,7 +36779,6 @@
         };
         return BitmapFontLoader;
     }());
-    //# sourceMappingURL=text-bitmap.es.js.map
 
     /*!
      * @pixi/filter-alpha - v5.3.0
@@ -36892,7 +36865,6 @@
         });
         return AlphaFilter;
     }(Filter));
-    //# sourceMappingURL=filter-alpha.es.js.map
 
     /*!
      * @pixi/filter-blur - v5.3.0
@@ -37717,7 +37689,6 @@
         });
         return BlurFilter;
     }(Filter));
-    //# sourceMappingURL=filter-blur.es.js.map
 
     /*!
      * @pixi/filter-color-matrix - v5.3.0
@@ -38247,7 +38218,6 @@
     }(Filter));
     // Americanized alias
     ColorMatrixFilter.prototype.grayscale = ColorMatrixFilter.prototype.greyscale;
-    //# sourceMappingURL=filter-color-matrix.es.js.map
 
     /*!
      * @pixi/filter-displacement - v5.3.0
@@ -38379,7 +38349,6 @@
         });
         return DisplacementFilter;
     }(Filter));
-    //# sourceMappingURL=filter-displacement.es.js.map
 
     /*!
      * @pixi/filter-fxaa - v5.3.0
@@ -38441,7 +38410,6 @@
         }
         return FXAAFilter;
     }(Filter));
-    //# sourceMappingURL=filter-fxaa.es.js.map
 
     /*!
      * @pixi/filter-noise - v5.3.0
@@ -38543,7 +38511,6 @@
         });
         return NoiseFilter;
     }(Filter));
-    //# sourceMappingURL=filter-noise.es.js.map
 
     /*!
      * @pixi/mixin-cache-as-bitmap - v5.3.0
@@ -38864,7 +38831,6 @@
         this.cacheAsBitmap = false;
         this.destroy(options);
     };
-    //# sourceMappingURL=mixin-cache-as-bitmap.es.js.map
 
     /*!
      * @pixi/mixin-get-child-by-name - v5.3.0
@@ -38912,7 +38878,6 @@
         }
         return null;
     };
-    //# sourceMappingURL=mixin-get-child-by-name.es.js.map
 
     /*!
      * @pixi/mixin-get-global-position - v5.3.0
@@ -38945,7 +38910,6 @@
         }
         return point;
     };
-    //# sourceMappingURL=mixin-get-global-position.es.js.map
 
     /*!
      * @pixi/mesh-extras - v5.3.0
@@ -39666,7 +39630,6 @@
         };
         return NineSlicePlane;
     }(SimplePlane));
-    //# sourceMappingURL=mesh-extras.es.js.map
 
     /*!
      * @pixi/sprite-animated - v5.3.0
@@ -40110,7 +40073,6 @@
         });
         return AnimatedSprite;
     }(Sprite));
-    //# sourceMappingURL=sprite-animated.es.js.map
 
     /*!
      * pixi.js - v5.3.0
@@ -41448,7 +41410,6 @@
         FXAAFilter: FXAAFilter,
         NoiseFilter: NoiseFilter,
     };
-    //# sourceMappingURL=pixi.es.js.map
 
     var PIXI = /*#__PURE__*/Object.freeze({
         utils: utils,
@@ -44288,7 +44249,6 @@
         }
         return target;
     }
-    //# sourceMappingURL=extend.js.map
 
     var typeString = 'Boolean Number String Function Array Date RegExp Object Error Symbol';
     var class2type = {};
@@ -44358,7 +44318,6 @@
             return type(tar) === 'NaN';
         },
     };
-    //# sourceMappingURL=is.js.map
 
     function getPoint(ev) {
         return {
@@ -44384,7 +44343,6 @@
             })();
         }
     };
-    //# sourceMappingURL=index.js.map
 
     // 挟持的原生事件
     var ORIGIN_EVENT_MAP = [{
@@ -44564,16 +44522,26 @@
                 this.mask = undefined;
                 this.container.mask = null;
             }
-            var mask = new Graphics();
-            mask.beginFill(0xFFFFFF, 1);
+            var rect = new Graphics();
+            rect.beginFill(0xFFFFFF, 1);
             if (this.radius) {
-                mask.drawRoundedRect(0, 0, this.width, this.height, this.radius);
+                rect.drawRoundedRect(0, 0, this.width, this.height, this.radius);
             }
             else {
-                mask.drawRect(0, 0, this.width, this.height);
+                rect.drawRect(0, 0, this.width, this.height);
             }
-            mask.endFill();
-            this.container.addChild(this.container.mask = this.mask = mask);
+            rect.endFill();
+            if (this.radius) {
+                this.container.mask = rect;
+            }
+            else {
+                var mask = new MaskData(rect);
+                mask.type = 1;
+                mask.autoDetect = false;
+                this.container.mask = mask;
+                this.container.hitArea = new Rectangle(0, 0, this.width, this.height);
+            }
+            this.container.addChild(rect);
         };
         PixiBetterScroller.prototype._bindOriginEvent = function () {
             var _this = this;
@@ -44851,7 +44819,6 @@
         };
         return PixiBetterScroller;
     }());
-    //# sourceMappingURL=index.js.map
 
     window.PIXI = PIXI;
     var view;
