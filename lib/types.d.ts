@@ -30,15 +30,11 @@ declare namespace PScroller {
     interface IConfig {
         timeForEndScroll?: number,
         // 定点滚动曲线
-        scrollCurve?: number,
+        bounceCurve?: number,
         // 触发滚动停止的最小变动值
         minDeltaToStop?: number,  
         // 惯性滚动的速度衰减
-        speedDecay?: (speed) => number,
-        // 弹性拉动衰减
-        bounceResist?: (delta) => number,
-        // 反向
-        antiFactor?: boolean | number,
+        speedDecayCurve?: number,
     }
     
     interface IOps {
@@ -46,12 +42,12 @@ declare namespace PScroller {
         height?: number,
         x?: number,
         y?: number,
-        direction?: 'horizontal' | 'vertical' | 'ver' | 'hor',
-        overflow?: 'scroll' | 'hidden',
+        scrollX?: boolean
+        scrollY?: boolean
         radius?: number,
         config?: IConfig,
-        onScroll?: (pos: number) => void
-        onBounce?: (direction: -1 | 1 | 0, next: (pos?: number) => void, pos: number) => void
+        onScroll?: (pos: number, status: 'x' | 'y') => void
+        onBounce?: (pos: number, back: (pos?: number) => void, status: ['x' | 'y', -1 | 0 | 1]) => void
     }
 
     interface destroyOps {
@@ -70,13 +66,11 @@ declare module 'pixi-better-scroller' {
         parent: any
 
         scrolling: boolean
-        direction: PScroller.IOps['direction']
         width: number
         height: number
         x: number
         y: number
         radius: number
-        overflow: 'scroll' | 'hidden'
         constructor(options: PScroller.IOps, parent: any)
         addChild(elm: any, scrollable?: boolean)
         removeChild(elm?: any)

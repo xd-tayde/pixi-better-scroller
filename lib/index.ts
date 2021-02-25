@@ -1,5 +1,6 @@
 import { Container, Graphics, MaskData, Rectangle } from 'pixi.js'
-import { is, getPoint, loop, extend } from './utils'
+import { is, getPoint, extend } from './utils'
+import { Scroller } from './scroller'
 
 // 挟持的原生事件
 const ORIGIN_EVENT_MAP = [{
@@ -19,15 +20,7 @@ const ORIGIN_EVENT_MAP = [{
     fn: '_end',
 }]
 
-function isVer(direction: PScroller.IOps['direction']) {
-    if (!direction) return true
-    return !['horizontal', 'hor'].includes(direction)
-}
-
 export default class PixiBetterScroller {
-    public options: PScroller.IOps
-
-    public direction: PScroller.IOps['direction'] = 'vertical'
     public get width() {
         return is.num(this.options.width) ? this.options.width : 500
     }
@@ -35,7 +28,7 @@ export default class PixiBetterScroller {
         if (this.options.width === val) return
         this.options.width = val
         this._createMask()
-        this.setScrollDisAndOverflow()
+        this.initScroller()
     }
 
     public get height() {
@@ -45,7 +38,7 @@ export default class PixiBetterScroller {
         if (this.options.height === val) return
         this.options.height = val
         this._createMask()
-        this.setScrollDisAndOverflow()
+        this.initScroller()
     }
 
     public get x() {
@@ -67,17 +60,22 @@ export default class PixiBetterScroller {
             this.container.y = val
         }
     }
+    public get scrolling() {
+        return !!(this.XScroller.scrolling && this.YScroller.scrolling)
+    }
 
+
+    public options: PScroller.IOps
     public radius: number = 0
-    public overflow: 'scroll' | 'hidden' = 'scroll'
+
+    public scrollX: boolean
+    public XScroller: Scroller
+    
+    public scrollY: boolean
+    public YScroller: Scroller
+
 
     public parent
-
-    private target = 'x'
-    private antiTarget = 'y'
-
-    private maxScrollDis: number = 0
-
     public container: Container
     public content: Container
     public static: Container
@@ -86,69 +84,22 @@ export default class PixiBetterScroller {
     private touching: boolean = false
     private touchStartPoints: PScroller.Point[] = []
     private curPoints: PScroller.Point[] = []
-    private bouncing: -1 | 1 | 0 = 0
-
-    public scrolling: boolean = false
 
     public config = {
         // 触发惯性滚动的 触摸时间上限
         timeForEndScroll: 300,
-        // 定点滚动曲线
-        scrollCurve: 7,
-        // 触发滚动停止的最小变动值
-        minDeltaToStop: 0.3,
-        // 惯性滚动的速度衰减
-        speedDecay: (speed) => speed - speed * 0.02,
-        // 反向阻碍系数
-        // 当反向增量 > 正向增量时，则阻止滚动
-        //      false: 不阻止
-        //      true: 反向增量 > 正向增量，则阻止滚动
-        //      number:  反向增量 + n > 正向增量，则阻止滚动
-        antiFactor: false,
-        // 弹性拉动衰减
-        bounceResist: (delta) => {
-            let rate
-            const attr = isVer(this.direction) ? 'height' : 'width'
-            const parentLen = this[attr]
-            const childLen = this.content[attr]
-            if (this.bouncing < 0) {
-                if (parentLen >= childLen) {
-                    rate = 0.8 - childLen * 0.0058
-                } else {
-                    rate = 0.8 - this.content[this.target] * 0.0058
-                }
-            } else if (this.bouncing > 0) {
-                if (parentLen >= childLen) {
-                    rate =  0.8 - childLen * 0.0058
-                } else {
-                    rate = 0.8 - (parentLen - this.content[this.target] - childLen) * 0.0058
-                }
-            } else {
-                rate = 1
-            }
-
-            if (rate < 0) rate = -rate
-            return delta * rate
-        },
     }
     constructor(options: PScroller.IOps = {}, parent?) {
         this.options = options
         this.parent = parent;
 
-        ['direction', 'overflow', 'radius'].map((attr) => {
+        ['scrollX', 'scrollY', 'radius'].map((attr) => {
             if (!is.undef(options[attr])) this[attr] = options[attr]
         })
 
-        if (isVer(this.direction)) {
-            this.target = 'y'
-            this.antiTarget = 'x'
-        } else {
-            this.target = 'x'
-            this.antiTarget = 'y'
-        }
-
         this.config = extend(this.config, this.options.config)
         this.init()
+        this.createScroller()
     }
     private init() {
         this.container = new Container()
@@ -217,7 +168,7 @@ export default class PixiBetterScroller {
         this.touchStartPoints.push(startPoint)
         this.curPoints.push(startPoint)
 
-        this.touching = true
+        this.touchScroller(this.touching = true)
     } 
     public _move(ev: PScroller.PixiEvent) {
         if (!this.touching) return
@@ -226,54 +177,24 @@ export default class PixiBetterScroller {
         const lastPoint = this._findLastPoint(curPoint.id)
         if (!lastPoint) return
 
-        let delta = curPoint[this.target] - lastPoint[this.target]
-        const antiDelta = curPoint[this.antiTarget] - lastPoint[this.antiTarget]
-        // 当偏移为0时，则跳过
-        if (!delta) return
+        let deltaX = curPoint.x - lastPoint.x
+        let deltaY = curPoint.y - lastPoint.y
 
-        // 反向阻碍
-        const { antiFactor } = this.config
-        if (antiFactor !== false) {
-            const anti = is.num(antiFactor) ? antiFactor : 0
-            if (Math.abs(antiDelta) + anti >= Math.abs(delta)) {
-                return
-            }
-        }
-
-        // 拖动跟随
-        this.scrolling = true
-        this._scroll(delta, (toBounce) => {
-            if (toBounce) {
-                this.bouncing = toBounce
-                delta = this.config.bounceResist(delta)
-                this._addPos(delta)
-            }
-        })
-
+        this.scrollScroller(deltaX, deltaY)
         this._replaceCurPoint(curPoint)
     }
     public _end(ev) {
-        this.touching = false
+        this.touchScroller(this.touching = false)
         const endPoint = getPoint(ev)
         const startPoint = this._findStartPoint(endPoint.id)
         if (!startPoint) return
 
         const deltaT = endPoint.t - startPoint.t
+        const deltaX = endPoint.x - startPoint.x
+        const deltaY = endPoint.y - startPoint.y
 
-        if (
-            this.bouncing &&
-            !(this.bouncing < 0 && this.content[this.target] < 0) &&
-            !(this.bouncing > 0 && this.content[this.target] > -this.maxScrollDis)
-        ) {
-            // 当正在回弹
-            // 且结束点未超过回弹终点时
-            // 继续回弹
-            this._bounceBack()
-        } else if (deltaT < this.config.timeForEndScroll) {
-            // 否则触发惯性滚动
-            this._endScroll(endPoint, deltaT)
-        }
-
+        this.handleScrollEnd(deltaX, deltaY, deltaT)
+        
         this.touchStartPoints = []
         this.curPoints = []
     }
@@ -299,132 +220,12 @@ export default class PixiBetterScroller {
         }
     }
 
-    private _bounceBack() {
-        const _back = (pos?) => {
-            const end = this.bouncing < 0 ? 0 : -this.maxScrollDis
-            this._scrollTo(typeof pos === 'number' ? pos : end, (pos, isStoped) => {
-                if (isStoped) {
-                    if (this.content[this.target] === end) {
-                        this.bouncing = 0
-                    }
-                    this.scrolling = false
-                } else {
-                    this._setPos(pos)
-                }
-            })
-        }
-        // 触发边界回弹
-        if (is.fn(this.options.onBounce)) {
-            this.options.onBounce(this.bouncing, (pos?) => _back(pos), this.content[this.target])
-        } else {
-            _back()
-        }
-    }
-    // 缓动定点滚动
-    private _scrollTo(end: number, callback?) {
-        let start = this.content[this.target]
-        if (start === end) return
-        loop(() => {
-            if (this.touching) return false
-            start = start + (end - start) / this.config.scrollCurve
-            if (Math.abs(start - end) < this.config.minDeltaToStop) {
-                this._setPos(end)
-                callback && callback(end, true)
-                return false
-            }
-            callback && callback(start, false)
-            return true
-        })
-    }
-    private _scroll(delta: number, callback = (toBounce) => {}) {
-        if (this.overflow === 'scroll') {
-            const next = this.content[this.target] + delta
-            if (next <= 0 && next >= -this.maxScrollDis) {
-                this._addPos(delta)
-                callback(false)
-
-                if (this.options.onScroll) {
-                    this.options.onScroll(this.content[this.target])
-                }
-            } else if (next <= 0) {
-                callback(1)
-            } else if (next >= -this.maxScrollDis) {
-                callback(-1)
-            }
-        }
-    }
-    private _endScroll(endPoint, deltaT) {
-        const startPoint = this._findStartPoint(endPoint.id)
-        if (!startPoint) return
-
-        const deltaPos = endPoint[this.target] - startPoint[this.target]
-
-        if (!deltaPos) return
-        let speed = deltaPos / deltaT
-        let dpos
-        loop((next) => {
-            // 点击停止惯性滚动
-            if (this.touching) {
-                this.scrolling = false
-                return
-            }
-            dpos = speed * 16
-
-            if (Math.abs(dpos) > 1) {
-                this._scroll(dpos, (toBounce) => {
-                    if (toBounce) {
-                        this.bouncing = toBounce
-    
-                        loop(() => {
-                            if (this.touching) return false
-    
-                            this._addPos(dpos)
-                            dpos = this.config.bounceResist(dpos)
-                            if (Math.abs(dpos) < this.config.minDeltaToStop) {
-                                this._bounceBack()
-                                return false
-                            } else {
-                                return true
-                            }
-                        })
-                    } else if (Math.abs(dpos) > 1)  {
-                        speed = this.config.speedDecay(speed)
-                        next()
-                    }
-                })
-            } else {
-                this.scrolling = false
-            }
-        }, false)
-    }
-    private _addPos(delta) {
-        if (!is.num(delta)) return
-        this.content[this.target] += Math.round(delta)
-    }
-    private _setPos(pos) {
-        if (!is.num(pos)) return
-        this.content[this.target] = Math.round(pos)
-    }
     public addChild(elm, scrollable: boolean = true) {
         if (scrollable) {
             this.content.addChild(elm)   
-            this.setScrollDisAndOverflow()
+            this.initScroller()
         } else {
             this.static.addChild(elm)
-        }
-    }
-    private setScrollDisAndOverflow() {
-        const attr = isVer(this.direction) ? 'height' : 'width'
-        const parentLen = this[attr]
-        const childLen = this.content[attr]
-
-        if (childLen > parentLen) {
-            this.maxScrollDis = childLen - parentLen
-            if (this.options.overflow !== 'hidden') {
-                this.overflow = 'scroll'
-            }
-        } else if (this.options.overflow !== 'scroll') {
-            this.overflow = 'hidden'
         }
     }
     public removeChild(elm) {
@@ -440,20 +241,87 @@ export default class PixiBetterScroller {
         this._unbindOriginEvent()
         this.container.destroy(options)
     }
-    public scrollTo(end, hasAnima: boolean = true) {
+    public scrollTo(end: number | number[], hasAnima: boolean = true) {
+        let endX, endY
+        if (is.num(end)) {
+            endX = endY = end
+        } else if (is.array(end)) {
+            endX = end[0]
+            endY = end[1]
+        }
+
         if (hasAnima) {
-            this._scrollTo(-end, (pos, isStoped) => {
-                const delta = pos - this.content[this.target]
-                this._scroll(delta, (toBounce) => {
-                    this._setPos(pos)
-                    if (isStoped && toBounce) {
-                        this.bouncing = toBounce
-                        this._bounceBack()
-                    }
-                })
-            })
+            this.XScroller.scrollTo(-endX)
+            this.YScroller.scrollTo(-endY)
         } else {
-            this._setPos(-end)
+            this.XScroller.setPos(-endX)
+            this.YScroller.setPos(-endY)
+        }
+    }
+
+
+    // control scroller
+    private createScroller() {
+        const createOpt = (dire: 'hor' | 'ver') => {
+            const scrollable = dire === 'hor' ? this.scrollX : this.scrollY
+            return {
+                parent: this,
+                target: this.content,
+                dire,
+                scrollable,
+                config: this.options.config,
+                onBounce: (pos, back, toBounce) => {
+                    if (is.fn(this.options.onBounce)) {
+                        this.options.onBounce(pos, back, toBounce)
+                    } else {
+                        back()
+                    }
+                },
+                onScroll: (pos, attr) => {
+                    if (is.fn(this.options.onScroll)) {
+                        this.options.onScroll(pos, attr)
+                    }
+                },
+            }
+        }
+        this.XScroller = new Scroller(createOpt('hor'))
+        this.YScroller = new Scroller(createOpt('ver'))
+    }
+    private initScroller() {
+        this.XScroller.init()
+        this.YScroller.init()
+    }
+    private touchScroller(touching: boolean) {
+        this.XScroller.setStatus(touching)
+        this.YScroller.setStatus(touching)
+    }
+    private scrollScroller(deltaX: number, deltaY: number) {
+        this.XScroller.scroll(deltaX)
+        this.YScroller.scroll(deltaY)
+    }
+    private handleScrollEnd(deltaX: number, deltaY: number, deltaT: number) {
+        if (this.XScroller.isToBounce()) {
+            // 当正在回弹
+            // 且结束点未超过回弹终点时
+            // 继续回弹
+            this.XScroller.bounceBack()
+        } else if (deltaT < this.config.timeForEndScroll) {
+            // 否则触发惯性滚动
+            if (!deltaX) return
+            const speed = deltaX / deltaT
+            this.XScroller.inertiaScroll(speed)
+        }
+
+        if (this.YScroller.isToBounce()) {
+            // 当正在回弹
+            // 且结束点未超过回弹终点时
+            // 继续回弹
+            this.YScroller.bounceBack()
+        } else if (deltaT < this.config.timeForEndScroll) {
+            // 否则触发惯性滚动
+            if (!deltaY) return
+            const speed = deltaY / deltaT
+            this.YScroller.inertiaScroll(speed)
         }
     }
 }

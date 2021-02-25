@@ -586,6 +586,7 @@
     if (!window.Int32Array) {
         window.Int32Array = Array;
     }
+    //# sourceMappingURL=polyfill.es.js.map
 
     var appleIphone = /iPhone/i;
     var appleIpod = /iPod/i;
@@ -711,6 +712,9 @@
             result.apple.tablet || result.android.tablet || result.windows.tablet;
         return result;
     }
+    //# sourceMappingURL=isMobile.js.map
+
+    //# sourceMappingURL=index.js.map
 
     /*!
      * @pixi/settings - v5.3.0
@@ -989,6 +993,7 @@
          */
         ROUND_PIXELS: false,
     };
+    //# sourceMappingURL=settings.es.js.map
 
     var eventemitter3 = createCommonjsModule(function (module) {
 
@@ -3813,6 +3818,7 @@
         MSAA_QUALITY[MSAA_QUALITY["MEDIUM"] = 4] = "MEDIUM";
         MSAA_QUALITY[MSAA_QUALITY["HIGH"] = 8] = "HIGH";
     })(MSAA_QUALITY || (MSAA_QUALITY = {}));
+    //# sourceMappingURL=constants.es.js.map
 
     /*!
      * @pixi/utils - v5.3.0
@@ -4674,6 +4680,7 @@
         }
         return defaultValue !== undefined ? defaultValue : 1;
     }
+    //# sourceMappingURL=utils.es.js.map
 
     var utils = /*#__PURE__*/Object.freeze({
         BaseTextureCache: BaseTextureCache,
@@ -6623,6 +6630,7 @@
         Transform.IDENTITY = new Transform();
         return Transform;
     }());
+    //# sourceMappingURL=math.es.js.map
 
     /*!
      * @pixi/display - v5.3.0
@@ -8290,6 +8298,7 @@
      * @function containerUpdateTransform
      */
     Container.prototype.containerUpdateTransform = Container.prototype.updateTransform;
+    //# sourceMappingURL=display.es.js.map
 
     /*!
      * @pixi/accessibility - v5.3.0
@@ -8874,6 +8883,7 @@
         };
         return AccessibilityManager;
     }());
+    //# sourceMappingURL=accessibility.es.js.map
 
     /*!
      * @pixi/ticker - v5.3.0
@@ -9717,6 +9727,7 @@
         };
         return TickerPlugin;
     }());
+    //# sourceMappingURL=ticker.es.js.map
 
     /*!
      * @pixi/interaction - v5.3.0
@@ -11913,6 +11924,7 @@
         };
         return InteractionManager;
     }(eventemitter3));
+    //# sourceMappingURL=interaction.es.js.map
 
     /*!
      * @pixi/runner - v5.3.0
@@ -12109,6 +12121,7 @@
          */
         run: { value: Runner.prototype.emit },
     });
+    //# sourceMappingURL=runner.es.js.map
 
     /*!
      * @pixi/core - v5.3.0
@@ -23026,6 +23039,7 @@
     // Setup the default BatchRenderer plugin, this is what
     // we'll actually export at the root level
     var BatchRenderer = BatchPluginFactory.create();
+    //# sourceMappingURL=core.es.js.map
 
     /*!
      * @pixi/app - v5.3.0
@@ -23297,6 +23311,7 @@
     }());
 
     Application.registerPlugin(ResizePlugin);
+    //# sourceMappingURL=app.es.js.map
 
     /*!
      * @pixi/extract - v5.3.0
@@ -23514,6 +23529,7 @@
         };
         return Extract;
     }());
+    //# sourceMappingURL=extract.es.js.map
 
     var parseUri = function parseURI (str, opts) {
       opts = opts || {};
@@ -26042,6 +26058,7 @@
 
       return Loader;
     };
+    //# sourceMappingURL=resource-loader.esm.js.map
 
     /*!
      * @pixi/loaders - v5.3.0
@@ -26359,6 +26376,7 @@
         };
         return AppLoaderPlugin;
     }());
+    //# sourceMappingURL=loaders.es.js.map
 
     /*!
      * @pixi/particles - v5.3.0
@@ -27162,6 +27180,7 @@
         };
         return ParticleRenderer;
     }(ObjectRenderer));
+    //# sourceMappingURL=particles.es.js.map
 
     /*!
      * @pixi/graphics - v5.3.0
@@ -30411,6 +30430,7 @@
         Graphics._TEMP_POINT = new Point();
         return Graphics;
     }(Container));
+    //# sourceMappingURL=graphics.es.js.map
 
     /*!
      * @pixi/sprite - v5.3.0
@@ -30992,6 +31012,7 @@
         });
         return Sprite;
     }(Container));
+    //# sourceMappingURL=sprite.es.js.map
 
     /*!
      * @pixi/text - v5.3.0
@@ -33036,6 +33057,7 @@
         });
         return Text;
     }(Sprite));
+    //# sourceMappingURL=text.es.js.map
 
     /*!
      * @pixi/prepare - v5.3.0
@@ -33662,6 +33684,7 @@
         };
         return TimeLimiter;
     }());
+    //# sourceMappingURL=prepare.es.js.map
 
     /*!
      * @pixi/spritesheet - v5.3.0
@@ -33993,6 +34016,7 @@
         };
         return SpritesheetLoader;
     }());
+    //# sourceMappingURL=spritesheet.es.js.map
 
     /*!
      * @pixi/sprite-tiling - v5.3.0
@@ -34394,6 +34418,7 @@
         };
         return TilingSpriteRenderer;
     }(ObjectRenderer));
+    //# sourceMappingURL=sprite-tiling.es.js.map
 
     /*!
      * @pixi/mesh - v5.3.0
@@ -35102,6 +35127,7 @@
         });
         return MeshGeometry;
     }(Geometry));
+    //# sourceMappingURL=mesh.es.js.map
 
     /*!
      * @pixi/text-bitmap - v5.3.0
@@ -36779,6 +36805,7 @@
         };
         return BitmapFontLoader;
     }());
+    //# sourceMappingURL=text-bitmap.es.js.map
 
     /*!
      * @pixi/filter-alpha - v5.3.0
@@ -36865,6 +36892,7 @@
         });
         return AlphaFilter;
     }(Filter));
+    //# sourceMappingURL=filter-alpha.es.js.map
 
     /*!
      * @pixi/filter-blur - v5.3.0
@@ -37689,6 +37717,7 @@
         });
         return BlurFilter;
     }(Filter));
+    //# sourceMappingURL=filter-blur.es.js.map
 
     /*!
      * @pixi/filter-color-matrix - v5.3.0
@@ -38218,6 +38247,7 @@
     }(Filter));
     // Americanized alias
     ColorMatrixFilter.prototype.grayscale = ColorMatrixFilter.prototype.greyscale;
+    //# sourceMappingURL=filter-color-matrix.es.js.map
 
     /*!
      * @pixi/filter-displacement - v5.3.0
@@ -38349,6 +38379,7 @@
         });
         return DisplacementFilter;
     }(Filter));
+    //# sourceMappingURL=filter-displacement.es.js.map
 
     /*!
      * @pixi/filter-fxaa - v5.3.0
@@ -38410,6 +38441,7 @@
         }
         return FXAAFilter;
     }(Filter));
+    //# sourceMappingURL=filter-fxaa.es.js.map
 
     /*!
      * @pixi/filter-noise - v5.3.0
@@ -38511,6 +38543,7 @@
         });
         return NoiseFilter;
     }(Filter));
+    //# sourceMappingURL=filter-noise.es.js.map
 
     /*!
      * @pixi/mixin-cache-as-bitmap - v5.3.0
@@ -38831,6 +38864,7 @@
         this.cacheAsBitmap = false;
         this.destroy(options);
     };
+    //# sourceMappingURL=mixin-cache-as-bitmap.es.js.map
 
     /*!
      * @pixi/mixin-get-child-by-name - v5.3.0
@@ -38878,6 +38912,7 @@
         }
         return null;
     };
+    //# sourceMappingURL=mixin-get-child-by-name.es.js.map
 
     /*!
      * @pixi/mixin-get-global-position - v5.3.0
@@ -38910,6 +38945,7 @@
         }
         return point;
     };
+    //# sourceMappingURL=mixin-get-global-position.es.js.map
 
     /*!
      * @pixi/mesh-extras - v5.3.0
@@ -39630,6 +39666,7 @@
         };
         return NineSlicePlane;
     }(SimplePlane));
+    //# sourceMappingURL=mesh-extras.es.js.map
 
     /*!
      * @pixi/sprite-animated - v5.3.0
@@ -40073,6 +40110,7 @@
         });
         return AnimatedSprite;
     }(Sprite));
+    //# sourceMappingURL=sprite-animated.es.js.map
 
     /*!
      * pixi.js - v5.3.0
@@ -41410,6 +41448,7 @@
         FXAAFilter: FXAAFilter,
         NoiseFilter: NoiseFilter,
     };
+    //# sourceMappingURL=pixi.es.js.map
 
     var PIXI = /*#__PURE__*/Object.freeze({
         utils: utils,
@@ -44249,6 +44288,7 @@
         }
         return target;
     }
+    //# sourceMappingURL=extend.js.map
 
     var typeString = 'Boolean Number String Function Array Date RegExp Object Error Symbol';
     var class2type = {};
@@ -44318,6 +44358,7 @@
             return type(tar) === 'NaN';
         },
     };
+    //# sourceMappingURL=is.js.map
 
     function getPoint(ev) {
         return {
@@ -44343,6 +44384,190 @@
             })();
         }
     };
+    //# sourceMappingURL=index.js.map
+
+    var Scroller = /** @class */ (function () {
+        function Scroller(opt) {
+            this.config = {
+                // 定点滚动曲线
+                bounceCurve: 7,
+                // 触发滚动停止的最小变动值
+                minDeltaToStop: 0.3,
+                // 惯性滚动的速度衰减
+                speedDecayCurve: 0.02,
+            };
+            this.callbacks = {};
+            this.pausing = false;
+            // 最大滚动距离
+            this.maxScrollDis = 0;
+            this.scrolling = false;
+            var parent = opt.parent, target = opt.target, dire = opt.dire, scrollable = opt.scrollable, config = opt.config, onBounce = opt.onBounce, onScroll = opt.onScroll;
+            this.parent = parent;
+            this.target = target;
+            if (!is.undef(scrollable))
+                this.scrollable = !!scrollable;
+            if (is.fn(onBounce))
+                this.callbacks.onBounce = onBounce;
+            if (is.fn(onScroll))
+                this.callbacks.onScroll = onScroll;
+            this.attr = dire === 'hor' ? 'x' : 'y';
+            this.len = dire === 'hor' ? 'width' : 'height';
+            this.config = extend(this.config, config);
+        }
+        Scroller.prototype.init = function () {
+            var pLen = this.parent[this.len];
+            var cLen = this.target[this.len];
+            if (cLen > pLen) {
+                this.maxScrollDis = cLen - pLen;
+                if (is.undef(this.scrollable)) {
+                    this.scrollable = true;
+                }
+            }
+        };
+        Scroller.prototype.scroll = function (delta) {
+            if (!this.scrollable || !delta)
+                return;
+            this.scrolling = true;
+            var next = this.target[this.attr] + delta;
+            if (next <= 0 && next >= -this.maxScrollDis) {
+                this.toBounce = 0;
+            }
+            else if (next <= 0) {
+                this.toBounce = 1;
+            }
+            else if (next >= -this.maxScrollDis) {
+                this.toBounce = -1;
+            }
+            delta = this.bounceResist(delta);
+            this.addPos(delta);
+            if (is.fn(this.callbacks.onScroll)) {
+                this.callbacks.onScroll(this.target[this.attr], this.attr);
+            }
+        };
+        Scroller.prototype.addPos = function (delta) {
+            if (!is.num(delta) || delta === 0)
+                return;
+            this.target[this.attr] += Math.round(delta);
+        };
+        Scroller.prototype.setPos = function (pos) {
+            if (!is.num(pos))
+                return;
+            this.target[this.attr] = Math.round(pos);
+        };
+        // 弹性拉动衰减
+        Scroller.prototype.bounceResist = function (delta) {
+            var rate;
+            var pLen = this.parent[this.len];
+            var cLen = this.target[this.len];
+            if (this.toBounce < 0) {
+                if (pLen >= cLen) {
+                    rate = 0.8 - cLen * 0.0058;
+                }
+                else {
+                    rate = 0.8 - this.target[this.attr] * 0.0058;
+                }
+            }
+            else if (this.toBounce > 0) {
+                if (pLen >= cLen) {
+                    rate = 0.8 - cLen * 0.0058;
+                }
+                else {
+                    rate = 0.8 - (pLen - this.target[this.attr] - cLen) * 0.0058;
+                }
+            }
+            else {
+                rate = 1;
+            }
+            return delta * Math.abs(rate);
+        };
+        // 弹性回弹
+        Scroller.prototype.bounceBack = function () {
+            var _this = this;
+            var _back = function (pos) {
+                var end = _this.toBounce < 0 ? 0 : -_this.maxScrollDis;
+                _this.scrollTo(is.num(pos) ? pos : end);
+            };
+            if (is.fn(this.callbacks.onBounce)) {
+                this.callbacks.onBounce(this.target[this.attr], function (pos) { return _back(pos); }, [this.attr, this.toBounce]);
+            }
+            else {
+                _back();
+            }
+        };
+        // 缓动滚动
+        Scroller.prototype.scrollTo = function (end) {
+            var _this = this;
+            var start = this.target[this.attr];
+            if (start === end)
+                return;
+            loop(function () {
+                if (_this.pausing)
+                    return false;
+                start = start + (end - start) / _this.config.bounceCurve;
+                if (Math.abs(start - end) < _this.config.minDeltaToStop) {
+                    // 停止
+                    _this.setPos(end);
+                    _this.scrolling = false;
+                    return false;
+                }
+                _this.setPos(start);
+                return true;
+            });
+        };
+        // 惯性滚动
+        Scroller.prototype.inertiaScroll = function (speed) {
+            var _this = this;
+            var delta;
+            loop(function (next) {
+                // 点击停止惯性滚动
+                if (_this.pausing) {
+                    _this.scrolling = false;
+                    return;
+                }
+                delta = speed * 16;
+                if (Math.abs(delta) > 1) {
+                    _this.scroll(delta);
+                    if (_this.toBounce) {
+                        loop(function () {
+                            if (_this.pausing)
+                                return false;
+                            _this.addPos(delta);
+                            delta = _this.bounceResist(delta);
+                            // 当下次滚动距离小于停止阈值时
+                            // 触发弹性回弹
+                            if (Math.abs(delta) < _this.config.minDeltaToStop) {
+                                _this.bounceBack();
+                                return false;
+                            }
+                            else {
+                                return true;
+                            }
+                        });
+                    }
+                    else if (Math.abs(delta) > 1) {
+                        speed = _this._speedDecay(speed);
+                        next();
+                    }
+                }
+                else {
+                    _this.scrolling = false;
+                }
+            }, false);
+        };
+        Scroller.prototype.setStatus = function (pause) {
+            this.pausing = pause;
+        };
+        Scroller.prototype.isToBounce = function () {
+            return !!(this.toBounce &&
+                !(this.toBounce < 0 && this.target[this.attr] < 0) &&
+                !(this.toBounce > 0 && this.target[this.attr] > -this.maxScrollDis));
+        };
+        Scroller.prototype._speedDecay = function (speed) {
+            return speed - speed * this.config.speedDecayCurve;
+        };
+        return Scroller;
+    }());
+    //# sourceMappingURL=scroller.js.map
 
     // 挟持的原生事件
     var ORIGIN_EVENT_MAP = [{
@@ -44361,87 +44586,27 @@
             name: 'pointercancel',
             fn: '_end',
         }];
-    function isVer(direction) {
-        if (!direction)
-            return true;
-        return !['horizontal', 'hor'].includes(direction);
-    }
     var PixiBetterScroller = /** @class */ (function () {
         function PixiBetterScroller(options, parent) {
             var _this = this;
             if (options === void 0) { options = {}; }
-            this.direction = 'vertical';
             this.radius = 0;
-            this.overflow = 'scroll';
-            this.target = 'x';
-            this.antiTarget = 'y';
-            this.maxScrollDis = 0;
             this.touching = false;
             this.touchStartPoints = [];
             this.curPoints = [];
-            this.bouncing = 0;
-            this.scrolling = false;
             this.config = {
                 // 触发惯性滚动的 触摸时间上限
                 timeForEndScroll: 300,
-                // 定点滚动曲线
-                scrollCurve: 7,
-                // 触发滚动停止的最小变动值
-                minDeltaToStop: 0.3,
-                // 惯性滚动的速度衰减
-                speedDecay: function (speed) { return speed - speed * 0.02; },
-                // 反向阻碍系数
-                // 当反向增量 > 正向增量时，则阻止滚动
-                //      false: 不阻止
-                //      true: 反向增量 > 正向增量，则阻止滚动
-                //      number:  反向增量 + n > 正向增量，则阻止滚动
-                antiFactor: false,
-                // 弹性拉动衰减
-                bounceResist: function (delta) {
-                    var rate;
-                    var attr = isVer(_this.direction) ? 'height' : 'width';
-                    var parentLen = _this[attr];
-                    var childLen = _this.content[attr];
-                    if (_this.bouncing < 0) {
-                        if (parentLen >= childLen) {
-                            rate = 0.8 - childLen * 0.0058;
-                        }
-                        else {
-                            rate = 0.8 - _this.content[_this.target] * 0.0058;
-                        }
-                    }
-                    else if (_this.bouncing > 0) {
-                        if (parentLen >= childLen) {
-                            rate = 0.8 - childLen * 0.0058;
-                        }
-                        else {
-                            rate = 0.8 - (parentLen - _this.content[_this.target] - childLen) * 0.0058;
-                        }
-                    }
-                    else {
-                        rate = 1;
-                    }
-                    if (rate < 0)
-                        rate = -rate;
-                    return delta * rate;
-                },
             };
             this.options = options;
             this.parent = parent;
-            ['direction', 'overflow', 'radius'].map(function (attr) {
+            ['scrollX', 'scrollY', 'radius'].map(function (attr) {
                 if (!is.undef(options[attr]))
                     _this[attr] = options[attr];
             });
-            if (isVer(this.direction)) {
-                this.target = 'y';
-                this.antiTarget = 'x';
-            }
-            else {
-                this.target = 'x';
-                this.antiTarget = 'y';
-            }
             this.config = extend(this.config, this.options.config);
             this.init();
+            this.createScroller();
         }
         Object.defineProperty(PixiBetterScroller.prototype, "width", {
             get: function () {
@@ -44452,7 +44617,7 @@
                     return;
                 this.options.width = val;
                 this._createMask();
-                this.setScrollDisAndOverflow();
+                this.initScroller();
             },
             enumerable: true,
             configurable: true
@@ -44466,7 +44631,7 @@
                     return;
                 this.options.height = val;
                 this._createMask();
-                this.setScrollDisAndOverflow();
+                this.initScroller();
             },
             enumerable: true,
             configurable: true
@@ -44493,6 +44658,13 @@
                 if (this.container) {
                     this.container.y = val;
                 }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PixiBetterScroller.prototype, "scrolling", {
+            get: function () {
+                return !!(this.XScroller.scrolling && this.YScroller.scrolling);
             },
             enumerable: true,
             configurable: true
@@ -44563,59 +44735,30 @@
             var startPoint = getPoint(ev);
             this.touchStartPoints.push(startPoint);
             this.curPoints.push(startPoint);
-            this.touching = true;
+            this.touchScroller(this.touching = true);
         };
         PixiBetterScroller.prototype._move = function (ev) {
-            var _this = this;
             if (!this.touching)
                 return;
             var curPoint = getPoint(ev);
             var lastPoint = this._findLastPoint(curPoint.id);
             if (!lastPoint)
                 return;
-            var delta = curPoint[this.target] - lastPoint[this.target];
-            var antiDelta = curPoint[this.antiTarget] - lastPoint[this.antiTarget];
-            // 当偏移为0时，则跳过
-            if (!delta)
-                return;
-            // 反向阻碍
-            var antiFactor = this.config.antiFactor;
-            if (antiFactor !== false) {
-                var anti = is.num(antiFactor) ? antiFactor : 0;
-                if (Math.abs(antiDelta) + anti >= Math.abs(delta)) {
-                    return;
-                }
-            }
-            // 拖动跟随
-            this.scrolling = true;
-            this._scroll(delta, function (toBounce) {
-                if (toBounce) {
-                    _this.bouncing = toBounce;
-                    delta = _this.config.bounceResist(delta);
-                    _this._addPos(delta);
-                }
-            });
+            var deltaX = curPoint.x - lastPoint.x;
+            var deltaY = curPoint.y - lastPoint.y;
+            this.scrollScroller(deltaX, deltaY);
             this._replaceCurPoint(curPoint);
         };
         PixiBetterScroller.prototype._end = function (ev) {
-            this.touching = false;
+            this.touchScroller(this.touching = false);
             var endPoint = getPoint(ev);
             var startPoint = this._findStartPoint(endPoint.id);
             if (!startPoint)
                 return;
             var deltaT = endPoint.t - startPoint.t;
-            if (this.bouncing &&
-                !(this.bouncing < 0 && this.content[this.target] < 0) &&
-                !(this.bouncing > 0 && this.content[this.target] > -this.maxScrollDis)) {
-                // 当正在回弹
-                // 且结束点未超过回弹终点时
-                // 继续回弹
-                this._bounceBack();
-            }
-            else if (deltaT < this.config.timeForEndScroll) {
-                // 否则触发惯性滚动
-                this._endScroll(endPoint, deltaT);
-            }
+            var deltaX = endPoint.x - startPoint.x;
+            var deltaY = endPoint.y - startPoint.y;
+            this.handleScrollEnd(deltaX, deltaY, deltaT);
             this.touchStartPoints = [];
             this.curPoints = [];
         };
@@ -44642,146 +44785,14 @@
                 this.curPoints.splice(index, 1, curPoint);
             }
         };
-        PixiBetterScroller.prototype._bounceBack = function () {
-            var _this = this;
-            var _back = function (pos) {
-                var end = _this.bouncing < 0 ? 0 : -_this.maxScrollDis;
-                _this._scrollTo(typeof pos === 'number' ? pos : end, function (pos, isStoped) {
-                    if (isStoped) {
-                        if (_this.content[_this.target] === end) {
-                            _this.bouncing = 0;
-                        }
-                        _this.scrolling = false;
-                    }
-                    else {
-                        _this._setPos(pos);
-                    }
-                });
-            };
-            // 触发边界回弹
-            if (is.fn(this.options.onBounce)) {
-                this.options.onBounce(this.bouncing, function (pos) { return _back(pos); }, this.content[this.target]);
-            }
-            else {
-                _back();
-            }
-        };
-        // 缓动定点滚动
-        PixiBetterScroller.prototype._scrollTo = function (end, callback) {
-            var _this = this;
-            var start = this.content[this.target];
-            if (start === end)
-                return;
-            loop(function () {
-                if (_this.touching)
-                    return false;
-                start = start + (end - start) / _this.config.scrollCurve;
-                if (Math.abs(start - end) < _this.config.minDeltaToStop) {
-                    _this._setPos(end);
-                    callback && callback(end, true);
-                    return false;
-                }
-                callback && callback(start, false);
-                return true;
-            });
-        };
-        PixiBetterScroller.prototype._scroll = function (delta, callback) {
-            if (callback === void 0) { callback = function (toBounce) { }; }
-            if (this.overflow === 'scroll') {
-                var next = this.content[this.target] + delta;
-                if (next <= 0 && next >= -this.maxScrollDis) {
-                    this._addPos(delta);
-                    callback(false);
-                    if (this.options.onScroll) {
-                        this.options.onScroll(this.content[this.target]);
-                    }
-                }
-                else if (next <= 0) {
-                    callback(1);
-                }
-                else if (next >= -this.maxScrollDis) {
-                    callback(-1);
-                }
-            }
-        };
-        PixiBetterScroller.prototype._endScroll = function (endPoint, deltaT) {
-            var _this = this;
-            var startPoint = this._findStartPoint(endPoint.id);
-            if (!startPoint)
-                return;
-            var deltaPos = endPoint[this.target] - startPoint[this.target];
-            if (!deltaPos)
-                return;
-            var speed = deltaPos / deltaT;
-            var dpos;
-            loop(function (next) {
-                // 点击停止惯性滚动
-                if (_this.touching) {
-                    _this.scrolling = false;
-                    return;
-                }
-                dpos = speed * 16;
-                if (Math.abs(dpos) > 1) {
-                    _this._scroll(dpos, function (toBounce) {
-                        if (toBounce) {
-                            _this.bouncing = toBounce;
-                            loop(function () {
-                                if (_this.touching)
-                                    return false;
-                                _this._addPos(dpos);
-                                dpos = _this.config.bounceResist(dpos);
-                                if (Math.abs(dpos) < _this.config.minDeltaToStop) {
-                                    _this._bounceBack();
-                                    return false;
-                                }
-                                else {
-                                    return true;
-                                }
-                            });
-                        }
-                        else if (Math.abs(dpos) > 1) {
-                            speed = _this.config.speedDecay(speed);
-                            next();
-                        }
-                    });
-                }
-                else {
-                    _this.scrolling = false;
-                }
-            }, false);
-        };
-        PixiBetterScroller.prototype._addPos = function (delta) {
-            if (!is.num(delta))
-                return;
-            this.content[this.target] += Math.round(delta);
-        };
-        PixiBetterScroller.prototype._setPos = function (pos) {
-            if (!is.num(pos))
-                return;
-            this.content[this.target] = Math.round(pos);
-        };
         PixiBetterScroller.prototype.addChild = function (elm, scrollable) {
             if (scrollable === void 0) { scrollable = true; }
             if (scrollable) {
                 this.content.addChild(elm);
-                this.setScrollDisAndOverflow();
+                this.initScroller();
             }
             else {
                 this.static.addChild(elm);
-            }
-        };
-        PixiBetterScroller.prototype.setScrollDisAndOverflow = function () {
-            var attr = isVer(this.direction) ? 'height' : 'width';
-            var parentLen = this[attr];
-            var childLen = this.content[attr];
-            if (childLen > parentLen) {
-                this.maxScrollDis = childLen - parentLen;
-                if (this.options.overflow !== 'hidden') {
-                    this.overflow = 'scroll';
-                }
-            }
-            else if (this.options.overflow !== 'scroll') {
-                this.overflow = 'hidden';
             }
         };
         PixiBetterScroller.prototype.removeChild = function (elm) {
@@ -44799,26 +44810,96 @@
             this.container.destroy(options);
         };
         PixiBetterScroller.prototype.scrollTo = function (end, hasAnima) {
-            var _this = this;
             if (hasAnima === void 0) { hasAnima = true; }
+            var endX, endY;
+            if (is.num(end)) {
+                endX = endY = end;
+            }
+            else if (is.array(end)) {
+                endX = end[0];
+                endY = end[1];
+            }
             if (hasAnima) {
-                this._scrollTo(-end, function (pos, isStoped) {
-                    var delta = pos - _this.content[_this.target];
-                    _this._scroll(delta, function (toBounce) {
-                        _this._setPos(pos);
-                        if (isStoped && toBounce) {
-                            _this.bouncing = toBounce;
-                            _this._bounceBack();
-                        }
-                    });
-                });
+                this.XScroller.scrollTo(-endX);
+                this.YScroller.scrollTo(-endY);
             }
             else {
-                this._setPos(-end);
+                this.XScroller.setPos(-endX);
+                this.YScroller.setPos(-endY);
+            }
+        };
+        // control scroller
+        PixiBetterScroller.prototype.createScroller = function () {
+            var _this = this;
+            var createOpt = function (dire) {
+                var scrollable = dire === 'hor' ? _this.scrollX : _this.scrollY;
+                return {
+                    parent: _this,
+                    target: _this.content,
+                    dire: dire,
+                    scrollable: scrollable,
+                    config: _this.options.config,
+                    onBounce: function (pos, back, toBounce) {
+                        if (is.fn(_this.options.onBounce)) {
+                            _this.options.onBounce(pos, back, toBounce);
+                        }
+                        else {
+                            back();
+                        }
+                    },
+                    onScroll: function (pos, attr) {
+                        if (is.fn(_this.options.onScroll)) {
+                            _this.options.onScroll(pos, attr);
+                        }
+                    },
+                };
+            };
+            this.XScroller = new Scroller(createOpt('hor'));
+            this.YScroller = new Scroller(createOpt('ver'));
+        };
+        PixiBetterScroller.prototype.initScroller = function () {
+            this.XScroller.init();
+            this.YScroller.init();
+        };
+        PixiBetterScroller.prototype.touchScroller = function (touching) {
+            this.XScroller.setStatus(touching);
+            this.YScroller.setStatus(touching);
+        };
+        PixiBetterScroller.prototype.scrollScroller = function (deltaX, deltaY) {
+            this.XScroller.scroll(deltaX);
+            this.YScroller.scroll(deltaY);
+        };
+        PixiBetterScroller.prototype.handleScrollEnd = function (deltaX, deltaY, deltaT) {
+            if (this.XScroller.isToBounce()) {
+                // 当正在回弹
+                // 且结束点未超过回弹终点时
+                // 继续回弹
+                this.XScroller.bounceBack();
+            }
+            else if (deltaT < this.config.timeForEndScroll) {
+                // 否则触发惯性滚动
+                if (!deltaX)
+                    return;
+                var speed = deltaX / deltaT;
+                this.XScroller.inertiaScroll(speed);
+            }
+            if (this.YScroller.isToBounce()) {
+                // 当正在回弹
+                // 且结束点未超过回弹终点时
+                // 继续回弹
+                this.YScroller.bounceBack();
+            }
+            else if (deltaT < this.config.timeForEndScroll) {
+                // 否则触发惯性滚动
+                if (!deltaY)
+                    return;
+                var speed = deltaY / deltaT;
+                this.YScroller.inertiaScroll(speed);
             }
         };
         return PixiBetterScroller;
     }());
+    //# sourceMappingURL=index.js.map
 
     window.PIXI = PIXI;
     var view;
@@ -44850,11 +44931,23 @@
         view: getView(),
     });
     // game.renderer.resize(iw, ih)
+    var container = new Container();
+    game.stage.addChild(container);
+    var text = createText({
+        content: "pixi-better-scroller",
+        style: {
+            fill: '#68beba',
+            fontSize: 20,
+        },
+    });
+    text.x = 20;
+    text.y = 10;
+    game.stage.addChild(text);
     var ver = createRect({
         width: 180,
         height: 280,
-        x: 50,
-        y: 20,
+        x: 0,
+        y: 0,
         borderWidth: 2,
         borderColor: '#f35588',
     });
@@ -44864,14 +44957,15 @@
         backgroundColor: '#beebe9',
     });
     var scroller = new PixiBetterScroller({
-        direction: 'vertical',
         width: 180,
         height: 280,
         radius: 10,
-        onBounce: function (direction, back, pos) {
-            console.log('pos', pos);
-            if (direction < 0) {
-                console.log('Refresh');
+        onScroll: function (attr, pos) {
+            console.log('attr, pos', attr, pos);
+        },
+        onBounce: function (pos, back, status) {
+            if (status[1] < 0) {
+                console.log('Refresh', pos);
                 if (pos > 40) {
                     back(40);
                     setTimeout(function () {
@@ -44882,7 +44976,7 @@
                     back();
                 }
             }
-            else if (direction > 0) {
+            else if (status[1] > 0) {
                 console.log('Loading');
                 back(scroller.height - scroller.content.height - 40);
                 setTimeout(function () {
@@ -44916,16 +45010,16 @@
             height: 60,
             backgroundColor: '#fffdf9',
         });
-        var text = createText({
+        var text_1 = createText({
             content: "item - " + i,
             style: {
                 fill: '#8ac6d1',
                 fontSize: 20,
             },
         });
-        text.x = (item.width - text.width) / 2;
-        text.y = (item.height - text.height) / 2;
-        item.addChild(text);
+        text_1.x = (item.width - text_1.width) / 2;
+        text_1.y = (item.height - text_1.height) / 2;
+        item.addChild(text_1);
         item.interactive = true;
         item.on('tap', function () {
             console.log("Tap item-" + i);
@@ -44935,7 +45029,7 @@
     for (var i = 0; i < 14; i++) {
         _loop_1(i);
     }
-    game.stage.addChild(ver);
+    container.addChild(ver);
     var refresh = createText({
         content: 'Refresh',
         x: 66,
@@ -44961,22 +45055,23 @@
     // 水平
     var horRect = createRect({
         width: 1300,
-        height: 160,
+        height: 340,
         backgroundColor: '#beebe9',
     });
     var hor = createRect({
         width: 260,
         height: 160,
-        x: 270,
-        y: 80,
+        x: 220,
+        y: 60,
         borderWidth: 2,
         borderColor: '#f35588',
     });
-    game.stage.addChild(hor);
+    container.addChild(hor);
     var scroller1 = new PixiBetterScroller({
-        direction: 'horizontal',
         width: 260,
         height: 160,
+        scrollY: true,
+        scrollX: true,
         onScroll: function (pos) {
             // console.log('scroll', pos)
         },
@@ -44994,16 +45089,16 @@
             height: 120,
             backgroundColor: '#fffdf9',
         });
-        var text = createText({
+        var text_2 = createText({
             content: "item - " + i,
             style: {
                 fill: '#8ac6d1',
                 fontSize: 20,
             },
         });
-        text.x = (item.width - text.width) / 2;
-        text.y = (item.height - text.height) / 2;
-        item.addChild(text);
+        text_2.x = (item.width - text_2.width) / 2;
+        text_2.y = (item.height - text_2.height) / 2;
+        item.addChild(text_2);
         item.interactive = true;
         item.on('tap', function () {
             if (!scroller1.scrolling) {
@@ -45015,11 +45110,43 @@
     for (var i = 0; i < 14; i++) {
         _loop_2(i);
     }
+    var _loop_3 = function (j) {
+        var item = createRect({
+            y: 160,
+            x: 15 + 90 * j,
+            width: 80,
+            height: 120,
+            backgroundColor: '#fffdf9',
+        });
+        var text_3 = createText({
+            content: "item - " + (j + 13),
+            style: {
+                fill: '#8ac6d1',
+                fontSize: 20,
+            },
+        });
+        text_3.x = (item.width - text_3.width) / 2;
+        text_3.y = (item.height - text_3.height) / 2;
+        item.addChild(text_3);
+        item.interactive = true;
+        item.on('tap', function () {
+            if (!scroller1.scrolling) {
+                console.log("Tap item-" + j);
+            }
+        });
+        horRect.addChild(item);
+    };
+    for (var j = 0; j < 14; j++) {
+        _loop_3(j);
+    }
+    container.x = (iw - container.width) / 2;
+    container.y = (ih - container.height) / 2;
     // setTimeout(() => {
-    //     scroller1.x = 500
-    //     scroller1.y = 300
-    //     scroller1.width = 400
-    // }, 2000)
+    // scroller1.scrollTo([100, 100], true)
+    // scroller1.x = 50
+    // scroller1.y = 300
+    // scroller1.width = 100
+    // }, 1000)
     function createRect(ops) {
         var _a = ops.width, width = _a === void 0 ? 0 : _a, _b = ops.height, height = _b === void 0 ? 0 : _b, backgroundColor = ops.backgroundColor, _c = ops.backgroundAlpha, backgroundAlpha = _c === void 0 ? 1 : _c, _d = ops.borderWidth, borderWidth = _d === void 0 ? 0 : _d, _e = ops.borderColor, borderColor = _e === void 0 ? 0x000000 : _e, _f = ops.borderRadius, props = __rest(ops, ["width", "height", "backgroundColor", "backgroundAlpha", "borderWidth", "borderColor", "borderRadius"]);
         var rect = new Graphics();
@@ -45062,6 +45189,7 @@
         extend(text, props);
         return text;
     }
+    //# sourceMappingURL=index.js.map
 
     exports.createRect = createRect;
     exports.createText = createText;

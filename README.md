@@ -17,20 +17,19 @@ import PixiBetterScroller from 'pixi-better-scroller'
 
 // init the scroller
 const scroller = new PixiBetterScroller({
-    direction: 'vertical',
     width: 260,
     height: 160,
     onScroll(pos) {
         console.log('scroll', pos)
     },
-    onBounce(direction, next) {
+    onBounce(direction, back) {
         console.log('onBounce', direction)
-        next()
+        back()
     },
 }, game.stage)
 
 // add some children into the scroller
-scroller.addChild(context)
+scroller.addChild(child)
 ```
 
 ## api
@@ -48,33 +47,35 @@ interface IOptions {
     // scroller position
     x?: number,
     y?: number,
+
+    // scroller radius
+    radius?: number
     
-    // scroll direction
-    direction?: 'horizontal' | 'vertical' | 'ver' | 'hor',
-    
-    overflow?: 'scroll' | 'hidden',
+    // scroll config
+    scrollX?: boolean
+    scrollY?: boolean
+
+    // scroll config
+    config?: IConfig,
     
     /**
      * scroll callback
      * @param pos: number, current scroller position
+     * @param status: current scroller direction
      */
-    onScroll?: (pos: number) => void
+    onScroll?: (pos: number， status: 'x' | 'y') => void
     
     /**
      * when scroll reach boundary of scroller
-     * @param direction: -1 | 1 (left/top | right/bottom)
-     * @param next: (pos?: number) => void, bounce back function
      * @param pos: number, current scroller position
+     * @param back: (pos?: number) => void, bounce back function
+     * @param status: []
      */
-    onBounce?: (direction, next, pos: number) => void
-    
-    // scroll config
-    config?: IConfig,
+    onBounce?: (pos: number, back: (pos?: number) => void, status: ['x' | 'y', -1 | 0 | 1]) => void
 }
 
 
 interface IConfig {
-
     // the max time between start and end will trigger the inertia scrolling
     // over this time, there will be no inertia
     // unit: ms, default: 300
@@ -89,20 +90,10 @@ interface IConfig {
     // it affects the smoothness of scrolling stop
     // unit: px, default: 0.3
     minDeltaToStop?: number,  
-    
-    // reverse direction factor to prevent scroll
-    //      false: close this rule
-    //      true: when antiDelta > delta, prevent scroll
-    //      number: when antiDelta + n > delta, prevent scroll
-    antiFactor?: boolean | number,
 
     // the speed attenuation of inertia scrolling
-    // default: speed - speed * 0.02
-    speedDecay?: (speed) => number,
-    
-    // the resistion of bounce
-    bounceResist?: (delta) => number,
-
+    // default: 0.02
+    speedDecayCurve?: number,
 }
 ```
 
@@ -116,7 +107,7 @@ add pixi element into the scroller.
  * @param scrollable?: boolean
  * tips: not scrollable element will be bottom (zIndex) by default, you can set zIndex to up.
  */
-scroller.addChild(elm, scrollable?)
+scroller.addChild(elm, true)
 ```
 
 ### `- scroller.removeChild(elm?)`
@@ -129,10 +120,10 @@ scroller scroll to end position.
 
 ```js
 /**
- * @param end: number
+ * @param end: number | [endX, endY]
  * @param hasAnima?: boolean
  */
-scroller.scrollTo(end, hasAnima?)
+scroller.scrollTo([100, 100], true)
 ```
 
 ### `- scroller.container`
